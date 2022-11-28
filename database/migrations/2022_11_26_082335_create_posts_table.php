@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained();
-            $table->string('title');
-            $table->string('description');
+            $table->string('title', 2000);
+            $table->string('description', 2000);
             $table->mediumText('content');
             $table->string('photo')->nullable();
             $table->timestamps();
