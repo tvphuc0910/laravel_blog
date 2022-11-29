@@ -2,12 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
 
 class PostController extends Controller
 {
+
+    private $model;
+
+    public function __construct()
+    {
+        $this->model = new Post();
+        $routeName = Route::currentRouteName();
+        $arr = explode('.', $routeName);
+        $arr = array_map('ucfirst',$arr);
+        $title = implode(' - ', $arr);
+        View::share('title', $title);
+    }
+
     public function index()
     {
         $posts = Post::all();
@@ -24,7 +41,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::query()->get();
+        return view('post.create', [
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -35,7 +55,11 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+        $path = Storage::disk('public')->putFile('photo', $request->file('photo'));
+        $arr = $request->validated();
+        $arr['photo'] = $path;
+        $this->model->create($arr);
+        return redirect()->route('posts.index')->with('success', 'Thêm thành công !');
     }
 
     /**

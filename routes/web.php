@@ -17,4 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function (){
     return view('layout.master');
 });
-Route::get('post', [PostController::class, 'index']);
+Route::resource('posts', PostController::class);
+//Route::get('posts', [PostController::class, 'index']);
+//Route::get('/create',action:[PostController::class, 'create'])->name('create');

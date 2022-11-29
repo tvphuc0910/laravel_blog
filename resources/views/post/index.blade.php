@@ -1,3 +1,7 @@
+<a href="{{ route('posts.create') }}">
+    Thêm
+</a>
+
 <table border="1" width="100%">
     <tr>
         <th>#</th>
@@ -14,7 +18,9 @@
             <td>{{ $post->category_id }}</td>
             <td>{{ $post->title }}</td>
             <td>{{ $post->description }}</td>
-            <td>{{ $post->photo }}</td>
+            <td>
+                <img src="{{ asset('storage/'. $post->photo) }}" height="50">
+            </td>
             <td>{{ $post->created_at }}</td>
             <td>{{ $post->updated_at }}</td>
         </tr>

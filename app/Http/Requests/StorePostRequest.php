@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Category;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StorePostRequest extends FormRequest
 {
@@ -13,7 +15,7 @@ class StorePostRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +26,25 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => [
+                'required',
+                'string',
+            ],
+            'description' => [
+                'required'
+            ],
+            'content' => [
+                'required'
+            ],
+            'photo' => [
+                'nullable',
+                'file',
+                'image',
+            ],
+            'category_id' => [
+                'required',
+                Rule::exists(Category::class, 'id'),
+            ],
         ];
     }
 }
