@@ -5,17 +5,32 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    private $model;
+
+    public function __construct()
+    {
+        $this->model = new Category();
+        $routeName = Route::currentRouteName();
+        $arr = explode('.', $routeName);
+        $arr = array_map('ucfirst',$arr);
+        $title = implode(' - ', $arr);
+        View::share('title', $title);
+    }
+
     public function index()
     {
-        //
+        $categories = Category::all();
+
+        return view('category.index',[
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -25,7 +40,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('category.create');
     }
 
     /**
@@ -36,7 +51,9 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        //
+        $this->model::create($request->validated());
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -58,7 +75,9 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('category.edit',[
+            'category' => $category,
+        ]);
     }
 
     /**
@@ -68,9 +87,12 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(Request $request, Category $category)
     {
-        //
+        $category->fill($request->except('_token'));
+        $category->save();
+
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -81,6 +103,8 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return redirect()->route('categories.index');
     }
 }

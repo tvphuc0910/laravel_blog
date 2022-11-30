@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
@@ -29,6 +30,7 @@ class PostController extends Controller
     {
         $posts = Post::all();
 
+        $categories = Category::query()->get();
         return view('post.index',[
             'posts' => $posts,
         ]);
@@ -59,6 +61,7 @@ class PostController extends Controller
         $arr = $request->validated();
         $arr['photo'] = $path;
         $this->model->create($arr);
+
         return redirect()->route('posts.index')->with('success', 'Thêm thành công !');
     }
 
@@ -81,7 +84,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categories = Category::query()->get();
+        return view('post.edit', [
+            'post' => $post,
+            'categories' => $categories,
+        ]);
     }
 
     /**
@@ -91,9 +98,25 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(Request $request, $post)
     {
-        //
+        $posts = Post::find($post);
+
+        $posts->category_id = $request->input('category_id');
+        $posts->title = $request->input('title');
+        $posts->description = $request->input('description');
+        $posts->content = $request->input('content');
+
+        if ($request->hasFile('photo')){
+            $file = $request->file('photo');
+                $extension = $request->photo->getClientOriginalExtension();
+                $fileName = 'photo/' . uniqid().'.'.$extension;
+                $file->move(public_path() . '/storage/photo', $fileName);
+                $data = $fileName;
+                $posts->photo = $data;
+        }
+        $posts->save();
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -104,6 +127,8 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        return redirect()->route('posts.index');
     }
 }

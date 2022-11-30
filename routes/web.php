@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,5 +19,6 @@ Route::get('/', function (){
     return view('layout.master');
 });
 Route::resource('posts', PostController::class);
+Route::resource('categories', CategoryController::class);
 //Route::get('posts', [PostController::class, 'index']);
 //Route::get('/create',action:[PostController::class, 'create'])->name('create');
