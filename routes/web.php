@@ -14,11 +14,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function (){
-    return view('layout.master');
+Route::get('/admin/', function (){
+    return view('admin.layout.master');
 });
-Route::resource('posts', PostController::class);
-Route::resource('categories', CategoryController::class);
+Route::get('/test', function (){
+    return view('admin.test');
+});
+Route::resource('admin/posts', PostController::class);
+Route::resource('admin/categories', CategoryController::class);
 //Route::get('posts', [PostController::class, 'index']);
 //Route::get('/create',action:[PostController::class, 'create'])->name('create');

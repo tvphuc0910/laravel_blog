@@ -19,7 +19,7 @@ class PostController extends Controller
     public function __construct()
     {
         $this->model = new Post();
-        $routeName = Route::currentRouteName();
+        $routeName = Route::currentRouteName() ;
         $arr = explode('.', $routeName);
         $arr = array_map('ucfirst',$arr);
         $title = implode(' - ', $arr);
@@ -31,7 +31,7 @@ class PostController extends Controller
         $posts = Post::all();
 
         $categories = Category::query()->get();
-        return view('post.index',[
+        return view('admin.post.index',[
             'posts' => $posts,
         ]);
     }
@@ -44,7 +44,7 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::query()->get();
-        return view('post.create', [
+        return view('admin.post.create', [
             'categories' => $categories,
         ]);
     }
@@ -73,7 +73,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('admin.post.show', [
+           'post' => $post,
+        ]);
     }
 
     /**
@@ -85,7 +87,7 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::query()->get();
-        return view('post.edit', [
+        return view('admin.post.edit', [
             'post' => $post,
             'categories' => $categories,
         ]);

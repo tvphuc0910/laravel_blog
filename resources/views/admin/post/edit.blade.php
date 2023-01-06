@@ -1,3 +1,5 @@
+@extends('admin.layout.master')
+@section('content')
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -27,10 +29,11 @@
     <br>
     Content
     <br>
-    <textarea name="content">{{ $post->content }}</textarea>
+    <textarea class="ckeditor" name="content">{{ $post->content }}</textarea>
     <br>
     Image
     <input type="file" name="photo">
     <br>
     <button>Update</button>
 </form>
+@endsection

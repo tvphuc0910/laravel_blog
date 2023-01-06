@@ -1,8 +1,10 @@
+@extends('admin.layout.master')
+@section('content')
 <a href="{{ route('posts.create') }}">
     Thêm
 </a>
 
-<table border="1" width="100%">
+<table class="table-condensed" border="1">
     <tr>
         <th>#</th>
         <th>Category id</th>
@@ -40,3 +42,4 @@
         </tr>
     @endforeach
 </table>
+@endsection
