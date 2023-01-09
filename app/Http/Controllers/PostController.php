@@ -106,6 +106,7 @@ class PostController extends Controller
 
         $posts->category_id = $request->input('category_id');
         $posts->title = $request->input('title');
+        $posts->slug = $request->input('slug');
         $posts->description = $request->input('description');
         $posts->content = $request->input('content');
 
