@@ -37,8 +37,8 @@
         <div class="card card-plain card-blog">
             <div class="row">
                 <div class="col-sm-6">
-                    <a href="'{{asset('storage/'. $post->photo)}}'" class="header">
-                        <img src="{{ public_path() }}/{{$post->photo}}">
+                    <a href="{{route('blog.show', $post)}}" class="header">
+                        <img src="{{asset('storage/'. $post->photo)}}">
                     </a>
                 </div>
                 <div class="col-sm-5 col-md-offset-1">
