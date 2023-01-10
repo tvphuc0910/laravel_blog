@@ -16,6 +16,6 @@
         <br>
         <input type="text" name="name" class="form-control">
     </div>
-    <button>Create</button>
+    <button class="btn btn-fill btn-success">Create</button>
 </form>
 @endsection

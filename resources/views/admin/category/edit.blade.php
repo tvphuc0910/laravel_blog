@@ -17,6 +17,6 @@
         <br>
         <input type="text" name="name" class="form-control" value="{{ $category->name }}">
     </div>
-    <button>Update</button>
+    <button class="btn btn-fill btn-success">Update</button>
 </form>
 @endsection

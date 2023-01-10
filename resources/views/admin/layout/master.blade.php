@@ -43,7 +43,7 @@
     </div>
 </div>
 
-@include('admin.layout.footer')
+{{--@include('admin.layout.footer')--}}
 
 </body>
 

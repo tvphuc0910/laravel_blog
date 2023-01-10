@@ -4,7 +4,7 @@
 <div class="section section-header section-header-about">
     <div class="parallax filter filter-color-black">
         <div class="image"
-             style="background-image:url('../assets/img/header-12.jpeg')">
+             style="background-image:url('{{asset('img/header-12.jpeg')}}')">
         </div>
         <div class="container">
             <div class="content">
@@ -44,18 +44,18 @@
                     <div class="row">
                         <div class="col-md-5 col-md-offset-1">
                             <div class="card card-plain">
-                                <img alt="..." src="../assets/img/office-1.jpeg" />
+                                <img alt="..." src="{{asset('img/office-1.jpeg')}}" />
                             </div>
                             <div class="card card-plain">
-                                <img alt="..." src="../assets/img/office-3.jpeg" />
+                                <img alt="..." src="{{asset('img/office-3.jpeg')}}" />
                             </div>
                         </div>
                         <div class="col-md-5">
                             <div class="card card-plain">
-                                <img alt="..." src="../assets/img/project-5.jpg" />
+                                <img alt="..." src="{{asset('img/office-3.jpeg')}}" />
                             </div>
                             <div class="card card-plain">
-                                <img alt="..." src="../assets/img/office-4.jpeg" />
+                                <img alt="..." src="{{asset('img/office-4.jpeg')}}" />
                             </div>
                         </div>
                     </div>
@@ -117,103 +117,5 @@
 </div>
 
 
-<div class="section section-our-team">
-    <div class="container">
-        <div class="text-area">
-            <div class="title-area">
-                <h2>Collaborators</h2>
-                <div class="separator separator-danger">✻</div>
-                <p class="description">There are two me's when I take a picture. As Wolf I take pictures to be sold and as Bear all of them are free of charge, take his as a philanthropist.</p>
-            </div>
-        </div>
-        <div class="team">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card card-member card-plain">
-                                <div class="content">
-                                    <div class="avatar avatar-danger">
-                                        <img alt="..." class="img-circle" src="../assets/img/faces/face_1.jpg" />
-                                    </div>
-                                    <div class="description">
-                                        <h3 class="big-text">Tina</h3>
-                                        <p class="small-text">Web designer @CreativeTim</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card card-member card-plain">
-                                <div class="content">
-                                    <div class="avatar avatar-danger">
-                                        <img alt="..." class="img-circle" src="../assets/img/faces/face_4.jpg" />
-                                    </div>
-                                    <div class="description">
-                                        <h3 class="big-text">Mike</h3>
-                                        <p class="small-text">Marketing @Shopify</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card card-member card-plain">
-                                <div class="content">
-                                    <div class="avatar avatar-danger">
-                                        <img alt="..." class="img-circle" src="../assets/img/faces/face_3.jpg" />
-                                    </div>
-                                    <div class="description">
-                                        <h3 class="big-text">Rosa</h3>
-                                        <p class="small-text">Product Designer @Xerox</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card card-member card-plain">
-                                <div class="content">
-                                    <div class="avatar avatar-danger">
-                                        <img alt="..." class="img-circle" src="../assets/img/faces/face_5.jpg" />
-                                    </div>
-                                    <div class="description">
-                                        <h3 class="big-text">Tony</h3>
-                                        <p class="small-text">Hacker @Canon</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card card-member card-plain">
-                                <div class="content">
-                                    <div class="avatar avatar-danger">
-                                        <img alt="..." class="img-circle" src="../assets/img/faces/face_2.jpg" />
-                                    </div>
-                                    <div class="description">
-                                        <h3 class="big-text">Northon</h3>
-                                        <p class="small-text">Happiness Hero @Nikon</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card card-member card-plain">
-                                <div class="content">
-                                    <div class="avatar avatar-danger">
-                                        <img alt="..." class="img-circle" src="../assets/img/faces/face_6.jpg" />
-                                    </div>
-                                    <div class="description">
-                                        <h3 class="big-text">Bear</h3>
-                                        <p class="small-text">Just a friend</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end team -->
-    </div>
-</div>
 
 @endsection

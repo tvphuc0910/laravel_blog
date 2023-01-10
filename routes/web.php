@@ -25,12 +25,9 @@ Route::get('/blog/{post:slug}', [BlogController::class, 'show'])->name('blog.sho
 Route::get('/about', function (){
     return view('about');
 })->name('about');
-//Route::get('/blog', [BlogController::class, 'index']);
+
 Route::get('/admin/', function (){
     return view('admin.layout.master');
-});
-Route::get('/test', function (){
-    return view('admin.test');
 });
 Route::resource('admin/posts', PostController::class);
 Route::resource('admin/categories', CategoryController::class);

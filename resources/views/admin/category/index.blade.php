@@ -1,10 +1,10 @@
 @extends('admin.layout.master')
 @section('content')
-<a href="{{ route('categories.create') }}">
-    Thêm
+<a class="btn btn-simple btn-success" href="{{ route('categories.create') }}">
+    Add new category
 </a>
 
-<table border="1" width="100%">
+<table class="table">
     <tr>
         <th>#</th>
         <th>Category</th>

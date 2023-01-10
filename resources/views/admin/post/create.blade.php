@@ -11,30 +11,38 @@
 @endif
 <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
     @csrf
-    <select name="category_id">
-        @foreach($categories as $category)
-            <option value="{{ $category->id }}">
-                {{$category->name}}
-            </option>
-        @endforeach
-    </select>
+    <label>Category</label>
+    <div class="form-group">
+        <select name="category_id" class="form-control" >
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}">
+                    {{$category->name}}
+                </option>
+            @endforeach
+        </select>
+    </div>
+    <br>
     <div class="form-group">
         <label>Title</label>
-        <br>
-        <input type="text" name="title" class="form-control">
+        <div class="form-group">
+            <input type="text" name="title" class="form-control">
+        </div>
     </div>
-    Description
-    <br>
-    <textarea name="description"></textarea>
-    <br>
-    Content
-    <br>
-    <textarea class="ckeditor" id="editor1" name="content"></textarea>
-    <br>
-    Image
-    <input type="file" name="photo">
-    <br>
-    <button>Create</button>
+    <div class="form-group">
+        <label>Description</label>
+        <br>
+        <textarea class="form-control" name="description"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Content</label>
+        <br>
+        <textarea class="ckeditor form-control" id="editor1" name="content"></textarea>
+    </div>
+    <div class="form-group">
+        <label>Image</label>
+        <input class="custom-file-input" type="file" name="photo">
+    </div>
+    <button class="btn btn-fill btn-success">Create</button>
     <script>
         CKEDITOR.replace( 'editor1', {
             filebrowserBrowseUrl: '{{asset('ckfinder/ckfinder.html')}}',

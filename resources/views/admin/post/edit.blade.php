@@ -32,9 +32,9 @@
     <textarea class="ckeditor" id="editor1" name="content">{{ $post->content }}</textarea>
     <br>
     Image
-    <input type="file" name="photo">
+    <input class="form-control" type="file" name="photo">
     <br>
-    <button>Update</button>
+    <button class="btn btn-fill btn-success">Update</button>
     <script>
         CKEDITOR.replace( 'editor1', {
             filebrowserBrowseUrl: '{{asset('ckfinder/ckfinder.html')}}',

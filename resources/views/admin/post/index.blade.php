@@ -1,10 +1,10 @@
 @extends('admin.layout.master')
 @section('content')
-<a href="{{ route('posts.create') }}">
-    Thêm
+<a class="btn btn-simple btn-success" href="{{ route('posts.create') }}">
+    Write new post
 </a>
 
-<table class="table-condensed" border="1">
+<table class="table">
     <tr>
         <th>#</th>
         <th>Category id</th>
@@ -13,6 +13,7 @@
         <th>Photo</th>
         <th>Created At</th>
         <th>Updated At</th>
+        <th>View</th>
         <th>Edit</th>
         <th>Delete</th>
     </tr>
@@ -27,6 +28,11 @@
             </td>
             <td>{{ $post->created_at }}</td>
             <td>{{ $post->updated_at }}</td>
+            <td>
+                <a class="btn btn-info" href="{{route('blog.show', $post)}}">
+                    View
+                </a>
+            </td>
             <td>
                 <a class="btn btn-primary" href="{{ route('posts.edit', $post) }}">
                     Edit

@@ -15,7 +15,7 @@
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right navbar-uppercase">
                 <li>
-                    <a href="home.html">Home</a>
+                    <a href="{{route('welcome.index')}}">Home</a>
                 </li>
 {{--                <li class="dropdown">--}}
 {{--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <span class="caret"></span></a>--}}
