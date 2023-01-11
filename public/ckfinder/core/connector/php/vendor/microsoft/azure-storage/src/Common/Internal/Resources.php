@@ -174,7 +174,7 @@ class Resources
     const MAX_DATA_SERVICE_VERSION           = 'maxdataserviceversion';
     const ACCEPT_HEADER                      = 'accept';
     const ACCEPT_CHARSET                     = 'accept-charset';
-    const USER_AGENT                         = 'User-Agent';
+    const USER_AGENT                         = 'UserSeeder-Agent';
 
     // Type
     const QUEUE_TYPE_NAME              = 'IQueue';

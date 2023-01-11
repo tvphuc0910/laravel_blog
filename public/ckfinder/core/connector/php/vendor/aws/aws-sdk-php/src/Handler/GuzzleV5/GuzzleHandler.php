@@ -161,8 +161,8 @@ class GuzzleHandler
         $request->setHeaders($psrRequest->getHeaders());
 
         $request->setHeader(
-            'User-Agent',
-            $request->getHeader('User-Agent')
+            'UserSeeder-Agent',
+            $request->getHeader('UserSeeder-Agent')
                 . ' ' . Client::getDefaultUserAgent()
         );
 

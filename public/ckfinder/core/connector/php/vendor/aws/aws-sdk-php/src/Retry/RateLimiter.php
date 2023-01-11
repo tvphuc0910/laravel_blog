@@ -7,7 +7,7 @@ namespace Aws\Retry;
  */
 class RateLimiter
 {
-    // User-configurable constants
+    // UserSeeder-configurable constants
     private $beta;
     private $minCapacity;
     private $minFillRate;

@@ -305,7 +305,7 @@ class ServicesBuilder
      */
     private static function getUserAgent()
     {
-        // e.g. User-Agent: Azure-Storage/0.10.0 (PHP 5.5.32)
+        // e.g. UserSeeder-Agent: Azure-Storage/0.10.0 (PHP 5.5.32)
         return 'Azure-Storage/' . Resources::SDK_VERSION . ' (PHP ' . PHP_VERSION . ')';
     }
 

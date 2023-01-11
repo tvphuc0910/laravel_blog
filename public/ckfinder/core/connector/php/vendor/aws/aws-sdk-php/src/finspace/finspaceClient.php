@@ -6,7 +6,7 @@ use Aws\CommandInterface;
 use Psr\Http\Message\RequestInterface;
 
 /**
- * This client is used to interact with the **FinSpace User Environment Management service** service.
+ * This client is used to interact with the **FinSpace UserSeeder Environment Management service** service.
  * @method \Aws\Result createEnvironment(array $args = [])
  * @method \GuzzleHttp\Promise\Promise createEnvironmentAsync(array $args = [])
  * @method \Aws\Result deleteEnvironment(array $args = [])

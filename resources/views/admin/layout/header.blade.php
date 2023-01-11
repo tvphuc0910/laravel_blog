@@ -57,6 +57,9 @@
                 <li>
                     <a href="{{ route('categories.index') }}">Categories</a>
                 </li>
+                <li>
+                    <a href="{{ route('logout') }}">Log out</a>
+                </li>
 {{--                <li>--}}
 {{--                    <a href="http://www.creative-tim.com/product/gaia-bootstrap-template-pro" class="btn btn-danger btn-fill">Buy now</a>--}}
 {{--                </li>--}}

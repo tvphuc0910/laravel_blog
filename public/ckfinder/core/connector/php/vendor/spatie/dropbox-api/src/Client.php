@@ -726,7 +726,7 @@ class Client
             $auth = array_merge(
                 $auth,
                 [
-                    'Dropbox-API-Select-User' => $this->teamMemberId,
+                    'Dropbox-API-Select-UserSeeder' => $this->teamMemberId,
                 ]
             );
         }

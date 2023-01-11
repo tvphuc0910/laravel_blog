@@ -227,7 +227,7 @@ class ClientResolver
         'ua_append' => [
             'type'     => 'value',
             'valid'    => ['string', 'array'],
-            'doc'      => 'Provide a string or array of strings to send in the User-Agent header.',
+            'doc'      => 'Provide a string or array of strings to send in the UserSeeder-Agent header.',
             'fn'       => [__CLASS__, '_apply_user_agent'],
             'default'  => [],
         ],
@@ -800,16 +800,16 @@ class ClientResolver
                 return $handler(
                     $command,
                     $request->withHeader(
-                        'X-Amz-User-Agent',
+                        'X-Amz-UserSeeder-Agent',
                         implode(' ', array_merge(
                             $xAmzUserAgent,
-                            $request->getHeader('X-Amz-User-Agent')
+                            $request->getHeader('X-Amz-UserSeeder-Agent')
                         ))
                     )->withHeader(
-                        'User-Agent',
+                        'UserSeeder-Agent',
                         implode(' ', array_merge(
                             $legacyUserAgent,
-                            $request->getHeader('User-Agent')
+                            $request->getHeader('UserSeeder-Agent')
                         ))
                     )
                 );

@@ -124,7 +124,7 @@ function choose_handler()
 }
 
 /**
- * Get the default User-Agent string to use with Guzzle
+ * Get the default UserSeeder-Agent string to use with Guzzle
  *
  * @return string
  */
@@ -291,7 +291,7 @@ function is_host_in_noproxy($host, array $noProxyArray)
  * @param string $json    JSON data to parse
  * @param bool $assoc     When true, returned objects will be converted
  *                        into associative arrays.
- * @param int    $depth   User specified recursion depth.
+ * @param int    $depth   UserSeeder specified recursion depth.
  * @param int    $options Bitmask of JSON decode options.
  *
  * @return mixed

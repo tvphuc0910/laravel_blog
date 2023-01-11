@@ -638,7 +638,7 @@ class Uri implements UriInterface
     private function filterUserInfoComponent($component)
     {
         if (!is_string($component)) {
-            throw new \InvalidArgumentException('User info must be a string');
+            throw new \InvalidArgumentException('UserSeeder info must be a string');
         }
 
         return preg_replace_callback(

@@ -12,10 +12,10 @@ trait UserAgentTrait
         $list = $client->getHandlerList();
         $list->appendBuild(Middleware::mapRequest(
             function(RequestInterface $req) use ($agentString) {
-                if (!empty($req->getHeader('User-Agent'))
-                    && !empty($req->getHeader('User-Agent')[0])
+                if (!empty($req->getHeader('UserSeeder-Agent'))
+                    && !empty($req->getHeader('UserSeeder-Agent')[0])
                 ) {
-                    $userAgent = $req->getHeader('User-Agent')[0];
+                    $userAgent = $req->getHeader('UserSeeder-Agent')[0];
                     if (strpos($userAgent, $agentString) === false) {
                         $userAgent .= " {$agentString}";
                     };
@@ -23,7 +23,7 @@ trait UserAgentTrait
                     $userAgent = $agentString;
                 }
 
-                $req =  $req->withHeader('User-Agent', $userAgent);
+                $req =  $req->withHeader('UserSeeder-Agent', $userAgent);
                 return $req;
             }
         ));

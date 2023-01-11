@@ -160,7 +160,7 @@ class EndpointDiscoveryMiddleware
                             $g
                         );
                     }
-                    
+
                     return $value;
                 };
 
@@ -354,8 +354,8 @@ class EndpointDiscoveryMiddleware
     private function modifyRequest(RequestInterface $request, $endpoint)
     {
         $parsed = $this->parseEndpoint($endpoint);
-        if (!empty($request->getHeader('User-Agent'))) {
-            $userAgent = $request->getHeader('User-Agent')[0];
+        if (!empty($request->getHeader('UserSeeder-Agent'))) {
+            $userAgent = $request->getHeader('UserSeeder-Agent')[0];
             if (strpos($userAgent, 'endpoint-discovery') === false) {
                 $userAgent = $userAgent . ' endpoint-discovery';
             }
@@ -369,7 +369,7 @@ class EndpointDiscoveryMiddleware
                     ->withHost($parsed['host'])
                     ->withPath($parsed['path'])
             )
-            ->withHeader('User-Agent', $userAgent);
+            ->withHeader('UserSeeder-Agent', $userAgent);
     }
 
     /**

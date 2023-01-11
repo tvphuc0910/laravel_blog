@@ -35,8 +35,8 @@ class GuzzleHandler
     public function __invoke(Psr7Request $request, array $options = [])
     {
         $request = $request->withHeader(
-            'User-Agent',
-            $request->getHeaderLine('User-Agent')
+            'UserSeeder-Agent',
+            $request->getHeaderLine('UserSeeder-Agent')
                 . ' ' . \GuzzleHttp\default_user_agent()
         );
 

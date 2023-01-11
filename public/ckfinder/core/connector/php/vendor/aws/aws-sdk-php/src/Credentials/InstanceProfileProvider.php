@@ -204,7 +204,7 @@ class InstanceProfileProvider
             $userAgent .= ' HHVM/' . HHVM_VERSION;
         }
         $userAgent .= ' ' . \Aws\default_user_agent();
-        $request = $request->withHeader('User-Agent', $userAgent);
+        $request = $request->withHeader('UserSeeder-Agent', $userAgent);
         foreach ($headers as $key => $value) {
             $request = $request->withHeader($key, $value);
         }

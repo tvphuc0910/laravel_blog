@@ -35,7 +35,7 @@ class Logger implements LoggerInterface, ResettableInterface
     /**
      * Interesting events
      *
-     * Examples: User logs in, SQL logs.
+     * Examples: UserSeeder logs in, SQL logs.
      */
     const INFO = 200;
 
