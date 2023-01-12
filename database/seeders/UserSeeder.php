@@ -18,8 +18,8 @@ class UserSeeder extends Seeder
         $data = [
             'name' => 'Thuy',
             'level' => 1,
-            'email' => 'minhthuy@gmail.com',
-            'password' => '123',
+            'email' => 'thuynguyenminh62@gmail.com',
+            'password' => 'nguyenminhthuy05072002@',
         ];
         User::create($data);
 
@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
             'name' => 'Phuc',
             'level' => 1,
             'email' => 'tvphuc0910@gmail.com',
-            'password' => '123',
+            'password' => 'tranvanphuc123',
         ];
         User::create($data);
     }
