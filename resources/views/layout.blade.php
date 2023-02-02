@@ -17,6 +17,7 @@
     <link href='https://fonts.googleapis.com/css?family=Cambo|Lato:400,700' rel='stylesheet' type='text/css'>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ asset('css/css/fonts/pe-icon-7-stroke.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.css">
 </head>
 
 <body>
@@ -57,7 +58,7 @@
 @yield('header')
 
 @yield('content')
-
+<div class="separator separator-danger">✻</div>
 <footer class="footer footer-color-black" data-color="black">
     <div class="container">
         <nav class="pull-left">
@@ -88,13 +89,35 @@
             &copy; <script>document.write(new Date().getFullYear())</script> Name
         </div>
     </div>
+
 </footer>
 
 </body>
 
 <script src="{{ asset('js/jquery.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/bootstrap.js') }}" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.min.js"></script>
+<script>
+    $("h2 , h3").each(function() {
+            var hyphenated = $(this).text().replace(/\s/g,'-');
+            $(this).attr('id',hyphenated);
+        }
+    );
 
+</script>
+<script>
+
+    /* ToC */
+    tocbot.init({
+        tocSelector: '.toc',
+        contentSelector: '.content-blog',
+        hasInnerContainers: true,
+        collapseDepth: 6,
+    });
+
+
+
+</script>
 <!--  js library for devices recognition -->
 <script type="text/javascript" src="{{ asset('js/modernizr.js') }}"></script>
 

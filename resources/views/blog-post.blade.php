@@ -22,10 +22,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10">
+                <div class="table-of-contents">
+                    <h4>TABLE OF CONTENTS</h4>
+                    <div class="toc"></div>
+                </div>
                 <div class="content-blog">
                     {!!$post->content!!}
                 </div>
-                <div class="separator separator-danger">✻</div>
             </div>
         </div>
     </div>
