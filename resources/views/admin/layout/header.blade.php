@@ -58,6 +58,9 @@
                     <a href="{{ route('categories.index') }}">Categories</a>
                 </li>
                 <li>
+                    <a href="{{ route('tags.index') }}">Tags</a>
+                </li>
+                <li>
                     <a href="{{ route('logout') }}">Log out</a>
                 </li>
 {{--                <li>--}}

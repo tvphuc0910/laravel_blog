@@ -8,12 +8,13 @@
     <link rel="icon" type="image/png" sizes="96x96" href="{{ asset('img/favicon.png') }}">
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <title>Home | Gaia - Bootstrap Template</title>
+    <title>Test Blog</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet"/>
     <link href="{{ asset('css/gaia.css') }}" rel="stylesheet"/>
 
     <!--     Fonts and icons     -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"/>
     <link href='https://fonts.googleapis.com/css?family=Cambo|Lato:400,700' rel='stylesheet' type='text/css'>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href="{{ asset('css/css/fonts/pe-icon-7-stroke.css') }}" rel="stylesheet">
@@ -45,7 +46,13 @@
                     <a href="{{ route('blog.index') }}">Blog</a>
                 </li>
                 <li>
+                    <a href="{{route('category.index')}}">Category</a>
+                </li>
+                <li>
                     <a href="{{route('about')}}">About me</a>
+                </li>
+                <li>
+                    <a href="{{route('search.index')}}">Search</a>
                 </li>
 
             </ul>
@@ -58,7 +65,7 @@
 @yield('header')
 
 @yield('content')
-<div class="separator separator-danger">✻</div>
+{{--<div class="separator separator-danger">✻</div>--}}
 <footer class="footer footer-color-black" data-color="black">
     <div class="container">
         <nav class="pull-left">

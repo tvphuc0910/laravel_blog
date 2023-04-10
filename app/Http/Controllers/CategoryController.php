@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
@@ -22,6 +23,14 @@ class CategoryController extends Controller
         $arr = array_map('ucfirst',$arr);
         $title = implode(' - ', $arr);
         View::share('title', $title);
+    }
+
+    public function guestIndex()
+    {
+        $categories = Category::with('latestPost')->take(20)->get();
+        return view('categories',[
+            'categories'=> $categories,
+        ]);
     }
 
     public function index()
@@ -62,9 +71,20 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
+    public function guestShow(Category $category)
+    {
+        $posts = Post::where('category_id', $category->id)->get();
+        return view('blog',[
+            'posts' => $posts,
+        ]);
+    }
+
     public function show(Category $category)
     {
-        //
+        $posts = Post::where('category_id', $category->id)->get();
+        return view('admin.category.show',[
+            'posts' => $posts,
+        ]);
     }
 
     /**
@@ -87,9 +107,13 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $category)
     {
-        $category->fill($request->except('_token'));
+        $category = Category::find($category);
+        $category->name = $request->input('name');
+        $category->slug = $request->input('slug');
+
+
         $category->save();
 
         return redirect()->route('categories.index');

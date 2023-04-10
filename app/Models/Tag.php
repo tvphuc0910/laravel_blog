@@ -6,7 +6,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Tag extends Model
 {
     use HasFactory,Sluggable;
 
@@ -18,15 +18,11 @@ class Category extends Model
             ]
         ];
     }
+    public function post(){
+        return $this->belongsToMany(Post::class, 'post_tag', 'id_post', 'id_tag');
+    }
 
-    protected $fillable =[
+    protected $fillable = [
         'name',
     ];
-    public function post(){
-        return $this->hasMany(Post::class);
-    }
-
-    public function latestPost() {
-        return $this->hasOne(Post::class)->latest();
-    }
 }

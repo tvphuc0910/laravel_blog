@@ -11,29 +11,45 @@
 @endif
 <form action="{{ route('posts.update', $post) }}" method="post" enctype="multipart/form-data">
     @csrf
-    @method('PUT')
-    <select name="category_id">
-        @foreach($categories as $category)
-            <option value="{{ $category->id }}" {{ $category->id == $post->category_id ? 'selected' : '' }}>{{ $category->name }}
-            </option>
-        @endforeach
-    </select>
+    <label>Category</label>
+    <div class="form-group">
+        @method('PUT')
+        <select name="category_id" class="form-control">
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}" {{ $category->id == $post->category_id ? 'selected' : '' }}>{{ $category->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+    <br>
     <div class="form-group">
         <label>Title</label>
-        <br>
-        <input type="text" name="title" class="form-control" value="{{ $post->title }}">
+        <div class="form-group">
+            <input type="text" name="title" class="form-control" value="{{ $post->title }}">
+        </div>
     </div>
-    Description
-    <br>
-    <textarea name="description">{{ $post->description }}</textarea>
-    <br>
-    Content
-    <br>
-    <textarea class="ckeditor" id="editor1" name="content">{{ $post->content }}</textarea>
-    <br>
-    Image
-    <input class="form-control" type="file" name="photo">
-    <br>
+    <div class="form-group">
+        <label>Description</label>
+        <br>
+        <textarea class="form-control" name="description">{{ $post->description }}</textarea>
+    </div>
+    <div class="form-group">
+        <label>Content</label>
+        <br>
+        <textarea class="ckeditor form-control" id="editor1" name="content">{{ $post->content }}</textarea>
+    </div>
+    <div class="form-group">
+        <label>Tags</label>
+        <select multiple class="form-control" name="tag[]">
+            @foreach($tags as $tag)
+                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Image</label>
+        <input class="custom-file-input" type="file" name="photo">
+    </div>
     <button class="btn btn-fill btn-success">Update</button>
     <script>
         CKEDITOR.replace( 'editor1', {

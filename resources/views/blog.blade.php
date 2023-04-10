@@ -43,9 +43,9 @@
                 </div>
                 <div class="col-sm-5 col-md-offset-1">
                     <div class="content">
-                        <h5 class="card-category text-info">
+                        <a href="{{route('category.show', $post->category->slug)}}"  class="btn btn-simple btn-info">
                             {{ $post->category->name }}
-                        </h5>
+                        </a>
                         <a href="{{route('blog.show', $post)}}" class="card-title">
                             <h2>{{$post->title}}</h2>
                         </a>
@@ -59,6 +59,8 @@
                 </div>
             </div>
         </div>
+            <br>
+            <br>
     @endforeach
 
     </div>

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
@@ -29,8 +29,6 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-
-        $categories = Category::query()->get();
         return view('admin.post.index',[
             'posts' => $posts,
         ]);
@@ -43,9 +41,11 @@ class PostController extends Controller
      */
     public function create()
     {
+        $tags = Tag::query()->get();
         $categories = Category::query()->get();
         return view('admin.post.create', [
             'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 
@@ -60,7 +60,7 @@ class PostController extends Controller
         $path = Storage::disk('public')->putFile('photo', $request->file('photo'));
         $arr = $request->validated();
         $arr['photo'] = $path;
-        $this->model->create($arr);
+        $this->model->create($arr)->tag()->attach($request->tag);
 
         return redirect()->route('posts.index')->with('success', 'Thêm thành công !');
     }
@@ -86,10 +86,12 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $tags = Tag::query()->get();
         $categories = Category::query()->get();
         return view('admin.post.edit', [
             'post' => $post,
             'categories' => $categories,
+            'tags' => $tags,
         ]);
     }
 
@@ -105,6 +107,7 @@ class PostController extends Controller
         $posts = Post::find($post);
 
         $posts->category_id = $request->input('category_id');
+        $posts->tag()->sync($request->tag);
         $posts->title = $request->input('title');
         $posts->slug = $request->input('slug');
         $posts->description = $request->input('description');

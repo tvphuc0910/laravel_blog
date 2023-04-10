@@ -7,7 +7,8 @@
 <table class="table">
     <tr>
         <th>#</th>
-        <th>Category id</th>
+        <th>Category</th>
+        <th>Tags</th>
         <th>Title</th>
         <th>Description</th>
         <th>Photo</th>
@@ -21,6 +22,11 @@
         <tr>
             <td>{{ $post->id }}</td>
             <td>{{ $post->category->name }}</td>
+            <td>
+                @foreach($post->tag as $tag)
+                    <span class="label label-info">{{ $tag->name }}</span>
+                @endforeach
+            </td>
             <td>{{ $post->title }}</td>
             <td>{{ $post->description }}</td>
             <td>

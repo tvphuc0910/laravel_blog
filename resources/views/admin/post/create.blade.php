@@ -39,6 +39,14 @@
         <textarea class="ckeditor form-control" id="editor1" name="content"></textarea>
     </div>
     <div class="form-group">
+        <label>Tags</label>
+        <select multiple class="form-control" name="tag[]">
+            @foreach($tags as $tag)
+                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="form-group">
         <label>Image</label>
         <input class="custom-file-input" type="file" name="photo">
     </div>
