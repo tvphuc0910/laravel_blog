@@ -16,7 +16,7 @@
             <th>Edit</th>
             <th>Delete</th>
         </tr>
-        @foreach($posts as $post)
+        @foreach($tag->post as $post)
             <tr>
                 <td>{{ $post->id }}</td>
                 <td>{{ $post->title }}</td>

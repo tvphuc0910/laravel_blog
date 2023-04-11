@@ -70,9 +70,8 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        $posts = Post::where('tag_id', $tag->id)->get();
         return view('admin.tag.show',[
-            'posts' => $posts,
+            'tag' => $tag,
         ]);
     }
 
