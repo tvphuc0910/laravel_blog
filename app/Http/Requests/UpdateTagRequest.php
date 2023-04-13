@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCategoryRequest extends FormRequest
+class UpdateTagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,7 @@ class UpdateCategoryRequest extends FormRequest
             'name' => [
                 'required',
                 'string',
-                'unique:App\Models\Category,name',
+                'unique:App\Models\Tag,name',
             ]
         ];
     }

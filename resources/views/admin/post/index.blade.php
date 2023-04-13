@@ -1,5 +1,19 @@
 @extends('admin.layout.master')
 @section('content')
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
 <a class="btn btn-simple btn-success" href="{{ route('posts.create') }}">
     Write new post
 </a>
@@ -30,7 +44,9 @@
             <td>{{ $post->title }}</td>
             <td>{{ $post->description }}</td>
             <td>
-                <img src="{{ asset('storage/'. $post->photo) }}" height="50">
+                @if(!empty($post->photo))
+                    <img src="{{ asset('storage/'. $post->photo) }}" height="50">
+                @endif
             </td>
             <td>{{ $post->created_at }}</td>
             <td>{{ $post->updated_at }}</td>
@@ -54,4 +70,8 @@
         </tr>
     @endforeach
 </table>
+<div class="col-md-12 text-center">
+    {{ $posts->links() }}
+</div>
+<br>
 @endsection

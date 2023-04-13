@@ -47,8 +47,8 @@ class Post extends Model implements Searchable
             $this->description,
             $this->category,
         );
-
-
     }
-
+    public function latestPost() {
+        return $this->latest();
+    }
 }

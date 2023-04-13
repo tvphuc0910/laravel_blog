@@ -64,6 +64,10 @@
     @endforeach
 
     </div>
+    <div class="col-md-12 text-center">
+        {{ $posts->links() }}
+    </div>
+    <br>
 </div>
 
 

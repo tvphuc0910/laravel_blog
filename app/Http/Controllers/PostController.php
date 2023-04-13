@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DestroyPostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
@@ -28,7 +31,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('id', 'desc')->paginate(6);
         return view('admin.post.index',[
             'posts' => $posts,
         ]);
@@ -57,12 +60,17 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $path = Storage::disk('public')->putFile('photo', $request->file('photo'));
-        $arr = $request->validated();
-        $arr['photo'] = $path;
+        if ($request->hasFile('photo')){
+            $path = Storage::disk('public')->putFile('photo', $request->file('photo'));
+            $arr = $request->validated();
+            $arr['photo'] = $path;
+        }
+        else {
+            $arr = $request->validated();
+        }
         $this->model->create($arr)->tag()->attach($request->tag);
 
-        return redirect()->route('posts.index')->with('success', 'Thêm thành công !');
+        return redirect()->route('posts.index')->with('message', 'Thêm thành công !');
     }
 
     /**
@@ -102,7 +110,7 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $post)
+    public function update(UpdatePostRequest $request, $post)
     {
         $posts = Post::find($post);
 
@@ -131,8 +139,17 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(DestroyPostRequest $request, $post)
     {
+        $post = Post::find($post);
+
+        $photo = 'storage/' . $post->photo;
+        if(File::exists(public_path($photo))){
+            File::delete(public_path($photo));
+        }else{
+            error_log('File not found');
+        }
+
         $post->delete();
 
         return redirect()->route('posts.index');

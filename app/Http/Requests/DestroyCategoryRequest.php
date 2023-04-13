@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Category;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class UpdateCategoryRequest extends FormRequest
+class DestroyCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +26,15 @@ class UpdateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
+            'category' => [
                 'required',
-                'string',
-                'unique:App\Models\Category,name',
-            ]
+                Rule::exists(Category::class, 'id')
+            ],
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge(['category' => $this->route('category')]);
     }
 }

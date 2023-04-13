@@ -25,18 +25,18 @@
     <div class="form-group">
         <label>Title</label>
         <div class="form-group">
-            <input type="text" name="title" class="form-control">
+            <input type="text" name="title" class="form-control" value="{{ old('title') }}">
         </div>
     </div>
     <div class="form-group">
         <label>Description</label>
         <br>
-        <textarea class="form-control" name="description"></textarea>
+        <textarea class="form-control" name="description">{{ old('description') }}</textarea>
     </div>
     <div class="form-group">
         <label>Content</label>
         <br>
-        <textarea class="ckeditor form-control" id="editor1" name="content"></textarea>
+        <textarea class="ckeditor form-control" id="editor1" name="content">{{ old('content') }}</textarea>
     </div>
     <div class="form-group">
         <label>Tags</label>

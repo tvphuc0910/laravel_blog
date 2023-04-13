@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DestroyTagRequest;
 use App\Http\Requests\StoreTagRequest;
+use App\Http\Requests\UpdateTagRequest;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
@@ -32,7 +34,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::all();
+        $tags = Tag::paginate(5);
 
         return view('admin.tag.index',[
             'tags' => $tags,
@@ -59,7 +61,7 @@ class TagController extends Controller
     {
         $this->model::create($request->validated());
 
-        return redirect()->route('tags.index');
+        return redirect()->route('tags.index')->with('message', 'Thêm thành công !');
     }
 
     /**
@@ -95,7 +97,7 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $tag)
+    public function update(UpdateTagRequest $request, $tag)
     {
         $tag = Tag::find($tag);
         $tag->name = $request->input('name');
@@ -113,8 +115,9 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
+    public function destroy(DestroyTagRequest $request, $tag)
     {
+        $tag = Tag::find($tag);
         $tag->delete();
 
         return redirect()->route('tags.index');

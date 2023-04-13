@@ -29,12 +29,15 @@ class UpdatePostRequest extends FormRequest
             'title' => [
                 'required',
                 'string',
+                Rule::unique('posts')->ignore($this->post),
             ],
             'description' => [
-                'required'
+                'required',
+                'string',
             ],
             'content' => [
-                'required'
+                'required',
+                'string',
             ],
             'photo' => [
                 'nullable',

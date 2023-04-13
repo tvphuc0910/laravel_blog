@@ -29,12 +29,15 @@ class StorePostRequest extends FormRequest
             'title' => [
                 'required',
                 'string',
+                'unique:posts,title',
             ],
             'description' => [
-                'required'
+                'required',
+                'string',
             ],
             'content' => [
-                'required'
+                'required',
+                'string',
             ],
             'photo' => [
                 'nullable',
@@ -47,4 +50,5 @@ class StorePostRequest extends FormRequest
             ],
         ];
     }
+
 }

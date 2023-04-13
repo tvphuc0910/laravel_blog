@@ -1,5 +1,20 @@
 @extends('admin.layout.master')
 @section('content')
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+@if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
+
 <a class="btn btn-simple btn-success" href="{{ route('tags.create') }}">
     Add new tag
 </a>
@@ -36,4 +51,8 @@
         </tr>
     @endforeach
 </table>
+<div class="col-md-12 text-center">
+    {{ $tags->links() }}
+</div>
+<br>
 @endsection

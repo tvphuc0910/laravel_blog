@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DestroyCategoryRequest;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
@@ -27,7 +28,7 @@ class CategoryController extends Controller
 
     public function guestIndex()
     {
-        $categories = Category::with('latestPost')->take(20)->get();
+        $categories = Category::with('latestPost')->paginate(3);
         return view('categories',[
             'categories'=> $categories,
         ]);
@@ -35,7 +36,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::paginate(5);
 
         return view('admin.category.index',[
             'categories' => $categories,
@@ -62,7 +63,7 @@ class CategoryController extends Controller
     {
         $this->model::create($request->validated());
 
-        return redirect()->route('categories.index');
+        return redirect()->route('categories.index')->with('message', 'Thêm thành công !');
     }
 
     /**
@@ -107,7 +108,7 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $category)
+    public function update(UpdateCategoryRequest $request, $category)
     {
         $category = Category::find($category);
         $category->name = $request->input('name');
@@ -125,8 +126,9 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(DestroyCategoryRequest $request, $category)
     {
+        $category = Category::find($category);
         $category->delete();
 
         return redirect()->route('categories.index');

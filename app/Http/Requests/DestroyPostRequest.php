@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Post;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class UpdateCategoryRequest extends FormRequest
+class DestroyPostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +26,15 @@ class UpdateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
+            'post' => [
                 'required',
-                'string',
-                'unique:App\Models\Category,name',
-            ]
+                Rule::exists(Post::class, 'id')
+            ],
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge(['post' => $this->route('post')]);
     }
 }

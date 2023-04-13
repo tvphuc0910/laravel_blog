@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Tag;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class UpdateCategoryRequest extends FormRequest
+class DestroyTagRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +26,15 @@ class UpdateCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
+            'tag' => [
                 'required',
-                'string',
-                'unique:App\Models\Category,name',
-            ]
+                Rule::exists(Tag::class, 'id')
+            ],
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge(['tag' => $this->route('tag')]);
     }
 }

@@ -74,6 +74,10 @@
 
         </div>
     </div>
+    <div class="col-md-12 text-center">
+        {{ $categories->links() }}
+    </div>
+    <br>
 
 
 @endsection
