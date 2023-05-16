@@ -7,7 +7,6 @@ use App\Http\Controllers\ItemSearchController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SendMailController;
-//use App\Http\Controllers\StudyController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -26,9 +25,9 @@ Route::get('login', [Authcontroller::class, 'login'])->name('login');
 Route::post('login', [Authcontroller::class, 'processLogin'])->name('process_login');
 Route::group([
     'middleware' => 'admin',
-], function (){
-    Route::get('logout',[Authcontroller::class, 'logout'])->name('logout');
-    Route::get('/admin', function (){
+], function () {
+    Route::get('logout', [Authcontroller::class, 'logout'])->name('logout');
+    Route::get('/admin', function () {
         return view('admin.layout.master');
     })->name('admin');
     Route::resource('admin/posts', PostController::class);
@@ -45,7 +44,7 @@ Route::get('/categories/{category:slug}', [CategoryController::class, 'guestShow
 
 Route::get('/blog/{post:slug}', [BlogController::class, 'show'])->name('blog.show');
 
-Route::get('/about', function (){
+Route::get('/about', function () {
     return view('about');
 })->name('about');
 

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    use HasFactory,Sluggable;
+    use HasFactory, Sluggable;
 
     public function sluggable(): array
     {
@@ -18,7 +18,9 @@ class Tag extends Model
             ]
         ];
     }
-    public function post(){
+
+    public function post()
+    {
         return $this->belongsToMany(Post::class, 'post_tag', 'id_tag', 'id_post');
     }
 

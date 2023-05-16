@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Category\CategoryRepository;
+use App\Repositories\Category\CategoryRepositoryImpl;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
@@ -15,7 +17,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(CategoryRepository::class, CategoryRepositoryImpl::class);
     }
 
     /**
@@ -30,5 +32,7 @@ class AppServiceProvider extends ServiceProvider
         if (env('APP_ENV') != 'local'){
             URL::forceScheme('https');
         }
+
+
     }
 }

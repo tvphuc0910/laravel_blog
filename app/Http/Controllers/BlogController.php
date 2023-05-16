@@ -4,20 +4,43 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Category;
+use App\Services\PostService;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
-    public function index(){
-        $posts = Post::orderBy('id', 'desc')->paginate(6);
-        return view('blog',[
-            'posts' => $posts,
-        ]);
+    private $postService;
+
+    public function __construct(PostService $postService)
+    {
+        $this->postService = $postService;
     }
 
-    public function show($slug){
-        $post = Post::where('slug', $slug)->first();
-        return view('blog-post', compact('post'));
+    public function index()
+    {
+        $viewData = [
+            'posts' => $this->postService->getListPaginate(),
+        ];
+        return view('blog')->with($viewData);
+    }
+
+    public function show($slug)
+    {
+        $post = $this->postService->findOneBySlug($slug);
+
+        $category = $post->category->id;
+
+        $id = $post->id;
+
+        $suggestedPosts = $this->postService->getListsuggestedPost($category, $id);
+
+        $viewData = [
+            'post' => $post,
+            'category' => $category,
+            'suggestedPosts' => $suggestedPosts,
+        ];
+
+        return view('blog-post')->with($viewData);
     }
 
 }

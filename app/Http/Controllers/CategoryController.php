@@ -3,44 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DestroyCategoryRequest;
-use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Category;
 use App\Models\Post;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\View;
+use App\Services\CategoryService;
 
 class CategoryController extends Controller
 {
 
-    private $model;
+    protected $categoryService;
 
-    public function __construct()
+    public function __construct(CategoryService $categoryService)
     {
-        $this->model = new Category();
-        $routeName = Route::currentRouteName();
-        $arr = explode('.', $routeName);
-        $arr = array_map('ucfirst',$arr);
-        $title = implode(' - ', $arr);
-        View::share('title', $title);
+        $this->categoryService = $categoryService;
     }
 
     public function guestIndex()
     {
-        $categories = Category::with('latestPost')->paginate(3);
-        return view('categories',[
-            'categories'=> $categories,
-        ]);
+        $viewData = [
+            'categories' => $this->categoryService->guestIndex(),
+        ];
+        return view('categories')->with($viewData);
     }
 
     public function index()
     {
-        $categories = Category::paginate(5);
+        $viewData = [
+            'categories' => $this->categoryService->index(),
+        ];
+        return view('admin.category.index')->with($viewData);
 
-        return view('admin.category.index',[
-            'categories' => $categories,
-        ]);
     }
 
     /**
@@ -61,7 +54,7 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $this->model::create($request->validated());
+        $this->categoryService->store($request);
 
         return redirect()->route('categories.index')->with('message', 'Thêm thành công !');
     }
@@ -74,18 +67,21 @@ class CategoryController extends Controller
      */
     public function guestShow(Category $category)
     {
-        $posts = Post::where('category_id', $category->id)->get();
-        return view('blog',[
-            'posts' => $posts,
-        ]);
+        $viewData = [
+            'posts' => $this->categoryService->guestShow($category),
+        ];
+
+        return view('blog')->with($viewData);
     }
 
     public function show(Category $category)
     {
-        $posts = Post::where('category_id', $category->id)->get();
-        return view('admin.category.show',[
-            'posts' => $posts,
-        ]);
+        $viewData = [
+            'posts' => $this->categoryService->show($category),
+        ];
+
+        return view('admin.category.show')->with($viewData);
+
     }
 
     /**
@@ -96,7 +92,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        return view('admin.category.edit',[
+        return view('admin.category.edit', [
             'category' => $category,
         ]);
     }
@@ -110,12 +106,7 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, $category)
     {
-        $category = Category::find($category);
-        $category->name = $request->input('name');
-        $category->slug = $request->input('slug');
-
-
-        $category->save();
+        $this->categoryService->update($request, $category);
 
         return redirect()->route('categories.index');
     }
@@ -128,8 +119,13 @@ class CategoryController extends Controller
      */
     public function destroy(DestroyCategoryRequest $request, $category)
     {
-        $category = Category::find($category);
-        $category->delete();
+        try {
+            $this->categoryService->destroy($category);
+        } catch (\Exception $e) {
+            return redirect()->back()->with([
+                'msg_error' => $e->getMessage(),
+            ]);
+        }
 
         return redirect()->route('categories.index');
     }

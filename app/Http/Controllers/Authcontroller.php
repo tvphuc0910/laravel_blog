@@ -8,10 +8,13 @@ use Throwable;
 
 class Authcontroller extends Controller
 {
-    public function login(){
+    public function login()
+    {
         return view('auth.login');
     }
-    public function processLogin(Request $request){
+
+    public function processLogin(Request $request)
+    {
         try {
             $user = User::query()
                 ->where('email', $request->get('email'))
@@ -23,11 +26,13 @@ class Authcontroller extends Controller
             session()->put('level', $user->level);
 
             return redirect()->route('admin');
-        } catch (Throwable $e){
+        } catch (Throwable $e) {
             return redirect()->route('login');
         }
     }
-    public function logout(){
+
+    public function logout()
+    {
         session()->flush();
 
         return redirect()->route('welcome.index');

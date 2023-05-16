@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    use HasFactory,Sluggable;
+    use HasFactory, Sluggable;
 
     public function sluggable(): array
     {
@@ -19,14 +19,17 @@ class Category extends Model
         ];
     }
 
-    protected $fillable =[
+    protected $fillable = [
         'name',
     ];
-    public function post(){
+
+    public function post()
+    {
         return $this->hasMany(Post::class);
     }
 
-    public function latestPost() {
+    public function latestPost()
+    {
         return $this->hasOne(Post::class)->latest();
     }
 }

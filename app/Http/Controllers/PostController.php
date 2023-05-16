@@ -21,17 +21,18 @@ class PostController extends Controller
 
     public function __construct()
     {
-        $this->model = new Post();
-        $routeName = Route::currentRouteName() ;
-        $arr = explode('.', $routeName);
-        $arr = array_map('ucfirst',$arr);
-        $title = implode(' - ', $arr);
-        View::share('title', $title);
+//        $this->model = new Post();
+//        $routeName = Route::currentRouteName() ;
+//        $arr = explode('.', $routeName);
+//        $arr = array_map('ucfirst',$arr);
+//        $title = implode(' - ', $arr);
+//        View::share('title', $title);
     }
 
     public function index()
     {
         $posts = Post::orderBy('id', 'desc')->paginate(6);
+//        $posts = Post::all();
         return view('admin.post.index',[
             'posts' => $posts,
         ]);

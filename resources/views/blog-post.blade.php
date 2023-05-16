@@ -33,7 +33,35 @@
         </div>
     </div>
 </div>
+Suggested Posts by category
+<br>
+@foreach($suggestedPosts as $suggestedPost)
+    <div class="card card-plain card-blog">
+        <div class="row">
+            <div class="col-sm-6">
+                <a href="{{route('blog.show', $suggestedPost)}}" class="header">
+                    <img src="{{asset('storage/'. $suggestedPost->photo)}}">
+                </a>
+            </div>
+            <div class="col-sm-5 col-md-offset-1">
+                <div class="content">
+                    <a href="{{route('category.show', $suggestedPost->category->slug)}}"  class="btn btn-simple btn-info">
+                        {{ $suggestedPost->category->name }}
+                    </a>
+                    <a href="{{route('blog.show', $suggestedPost)}}" class="card-title">
+                        <h2>{{$suggestedPost->title}}</h2>
+                    </a>
 
+                    <p class="text-gray">{{$suggestedPost->description}}</p>
+
+
+                    <a href="{{route('blog.show', $suggestedPost)}}" class="btn btn-danger btn-fill">Read More</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
 
 @endsection
 

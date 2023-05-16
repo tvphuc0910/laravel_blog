@@ -10,7 +10,8 @@ use Cviebrock\EloquentSluggable\Sluggable;
 
 class Post extends Model implements Searchable
 {
-    use HasFactory,Sluggable;
+    use HasFactory, Sluggable;
+
     public function sluggable(): array
     {
         return [
@@ -19,19 +20,23 @@ class Post extends Model implements Searchable
             ]
         ];
     }
+
     protected $fillable = [
-      'title',
-      'description',
-      'content',
-      'photo',
-      'category_id',
-      'tag',
+        'title',
+        'description',
+        'content',
+        'photo',
+        'category_id',
+        'tag',
     ];
-    public function category(){
+
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function tag(){
+    public function tag()
+    {
         return $this->belongsToMany(Tag::class, 'post_tag', 'id_post', 'id_tag');
     }
 
@@ -48,7 +53,9 @@ class Post extends Model implements Searchable
             $this->category,
         );
     }
-    public function latestPost() {
+
+    public function latestPost()
+    {
         return $this->latest();
     }
 }
