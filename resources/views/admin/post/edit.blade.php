@@ -42,7 +42,13 @@
         <label>Tags</label>
         <select multiple class="form-control" name="tag[]">
             @foreach($tags as $tag)
-                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                        <option value="{{ $tag->id }}"
+                            @foreach($post->tag as $selectedTag)
+                                @if($tag->id == $selectedTag->id)
+                                    selected="selected"
+                                @endif
+                            @endforeach
+                        >{{ $tag->name }}</option>
             @endforeach
         </select>
     </div>

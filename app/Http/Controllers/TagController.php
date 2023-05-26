@@ -5,25 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Requests\DestroyTagRequest;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
-use App\Models\Post;
 use App\Models\Tag;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\View;
+use App\Services\TagService;
 
 class TagController extends Controller
 {
 
-    private $model;
+    protected $tagService;
 
-    public function __construct()
+    public function __construct(TagService $tagService)
     {
-        $this->model = new Tag();
-        $routeName = Route::currentRouteName();
-        $arr = explode('.', $routeName);
-        $arr = array_map('ucfirst',$arr);
-        $title = implode(' - ', $arr);
-        View::share('title', $title);
+        $this->tagService = $tagService;
     }
 
 
@@ -34,11 +26,11 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::paginate(5);
+        $viewData = [
+            'tags' => $this->tagService->index(),
+        ];
 
-        return view('admin.tag.index',[
-            'tags' => $tags,
-        ]);
+        return view('admin.tag.index')->with($viewData);
     }
 
     /**
@@ -59,7 +51,7 @@ class TagController extends Controller
      */
     public function store(StoreTagRequest $request)
     {
-        $this->model::create($request->validated());
+        $this->tagService->store($request);
 
         return redirect()->route('tags.index')->with('message', 'Thêm thành công !');
     }
@@ -72,7 +64,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        return view('admin.tag.show',[
+        return view('admin.tag.show', [
             'tag' => $tag,
         ]);
     }
@@ -85,7 +77,7 @@ class TagController extends Controller
      */
     public function edit(Tag $tag)
     {
-        return view('admin.tag.edit',[
+        return view('admin.tag.edit', [
             'tag' => $tag,
         ]);
     }
@@ -99,12 +91,7 @@ class TagController extends Controller
      */
     public function update(UpdateTagRequest $request, $tag)
     {
-        $tag = Tag::find($tag);
-        $tag->name = $request->input('name');
-        $tag->slug = $request->input('slug');
-
-
-        $tag->save();
+        $this->tagService->update($request, $tag);
 
         return redirect()->route('tags.index');
     }
@@ -117,8 +104,7 @@ class TagController extends Controller
      */
     public function destroy(DestroyTagRequest $request, $tag)
     {
-        $tag = Tag::find($tag);
-        $tag->delete();
+        $this->tagService->destroy($tag);
 
         return redirect()->route('tags.index');
     }

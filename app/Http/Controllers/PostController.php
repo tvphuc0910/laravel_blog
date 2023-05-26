@@ -3,39 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DestroyPostRequest;
-use App\Http\Requests\UpdatePostRequest;
-use App\Models\Category;
-use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
-use App\Models\Tag;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\View;
+use App\Http\Requests\UpdatePostRequest;
+use App\Models\Post;
+use App\Services\CategoryService;
+use App\Services\PostService;
+use App\Services\TagService;
 
 class PostController extends Controller
 {
+    private $postService;
+    private $categoryService;
+    private $tagService;
 
-    private $model;
-
-    public function __construct()
+    public function __construct(PostService $postService, CategoryService $categoryService, TagService $tagService)
     {
-//        $this->model = new Post();
-//        $routeName = Route::currentRouteName() ;
-//        $arr = explode('.', $routeName);
-//        $arr = array_map('ucfirst',$arr);
-//        $title = implode(' - ', $arr);
-//        View::share('title', $title);
+        $this->postService = $postService;
+        $this->categoryService = $categoryService;
+        $this->tagService = $tagService;
     }
 
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->paginate(6);
-//        $posts = Post::all();
-        return view('admin.post.index',[
-            'posts' => $posts,
-        ]);
+        $viewData = [
+            'posts' => $this->postService->index(),
+        ];
+
+        return view('admin.post.index')->with($viewData);
     }
 
     /**
@@ -45,12 +39,19 @@ class PostController extends Controller
      */
     public function create()
     {
-        $tags = Tag::query()->get();
-        $categories = Category::query()->get();
-        return view('admin.post.create', [
-            'categories' => $categories,
-            'tags' => $tags,
-        ]);
+        $viewData = [
+            'categories' => $this->categoryService->getAllCategory(),
+            'tags' => $this->tagService->getAllTag(),
+        ];
+
+        return view('admin.post.create')->with($viewData);
+
+//        $tags = Tag::query()->get();
+//        $categories = Category::query()->get();
+//        return view('admin.post.create', [
+//            'categories' => $categories,
+//            'tags' => $tags,
+//        ]);
     }
 
     /**
@@ -61,15 +62,16 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        if ($request->hasFile('photo')){
-            $path = Storage::disk('public')->putFile('photo', $request->file('photo'));
-            $arr = $request->validated();
-            $arr['photo'] = $path;
-        }
-        else {
-            $arr = $request->validated();
-        }
-        $this->model->create($arr)->tag()->attach($request->tag);
+        $this->postService->store($request);
+//        if ($request->hasFile('photo')){
+//            $path = Storage::disk('public')->putFile('photo', $request->file('photo'));
+//            $arr = $request->validated();
+//            $arr['photo'] = $path;
+//        }
+//        else {
+//            $arr = $request->validated();
+//        }
+//        $this->model->create($arr)->tag()->attach($request->tag);
 
         return redirect()->route('posts.index')->with('message', 'Thêm thành công !');
     }
@@ -83,7 +85,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         return view('admin.post.show', [
-           'post' => $post,
+            'post' => $post,
         ]);
     }
 
@@ -95,13 +97,13 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        $tags = Tag::query()->get();
-        $categories = Category::query()->get();
-        return view('admin.post.edit', [
+        $viewData = [
+            'categories' => $this->categoryService->getAllCategory(),
+            'tags' => $this->tagService->getAllTag(),
             'post' => $post,
-            'categories' => $categories,
-            'tags' => $tags,
-        ]);
+        ];
+
+        return view('admin.post.edit')->with($viewData);
     }
 
     /**
@@ -113,24 +115,8 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, $post)
     {
-        $posts = Post::find($post);
+        $this->postService->update($request, $post);
 
-        $posts->category_id = $request->input('category_id');
-        $posts->tag()->sync($request->tag);
-        $posts->title = $request->input('title');
-        $posts->slug = $request->input('slug');
-        $posts->description = $request->input('description');
-        $posts->content = $request->input('content');
-
-        if ($request->hasFile('photo')){
-            $file = $request->file('photo');
-                $extension = $request->photo->getClientOriginalExtension();
-                $fileName = 'photo/' . uniqid().'.'.$extension;
-                $file->move(public_path() . '/storage/photo', $fileName);
-                $data = $fileName;
-                $posts->photo = $data;
-        }
-        $posts->save();
         return redirect()->route('posts.index');
     }
 
@@ -142,16 +128,7 @@ class PostController extends Controller
      */
     public function destroy(DestroyPostRequest $request, $post)
     {
-        $post = Post::find($post);
-
-        $photo = 'storage/' . $post->photo;
-        if(File::exists(public_path($photo))){
-            File::delete(public_path($photo));
-        }else{
-            error_log('File not found');
-        }
-
-        $post->delete();
+        $this->postService->destroy($post);
 
         return redirect()->route('posts.index');
     }

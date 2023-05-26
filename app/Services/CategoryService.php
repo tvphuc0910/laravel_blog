@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Category;
 use App\Repositories\Category\CategoryRepository;
 use Exception;
 use Illuminate\Http\Request;
@@ -15,6 +16,10 @@ class CategoryService
     ) {
     }
 
+    public function getAllCategory()
+    {
+        return $this->categoryRepository->getAllCategory();
+    }
 
     public function index()
     {
@@ -41,15 +46,20 @@ class CategoryService
      * @param  Request  $request
      * @return mixed
      */
-    public function store(Request $request)
+    public function store(Request $params)
     {
-        $this->categoryRepository->store($request->validated());
+        $this->categoryRepository->store($params->validated());
     }
 
-    public function update(Request $request, $category)
+    public function update(Request $params, $category)
     {
-        $this->categoryRepository->update($request, $category);
+        $category = Category::find($category);
+        $category->name = $params->input('name');
+        $category->slug = $params->input('slug');
+
+        $this->categoryRepository->updateById($category);
     }
+
     /**
      * Xoa du category bang id
      *

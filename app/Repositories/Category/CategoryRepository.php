@@ -11,9 +11,10 @@ interface CategoryRepository
      * @return void
      */
     public function destroyById($id): void;
-    public function store($request):void;
+    public function getAllCategory();
+    public function store($params):void;
     public function getListForGuest();
     public function getListForAdmin();
     public function showPostsByCategory($category);
-    public function update($request, $category):void;
+    public function updateById($category):void;
 }

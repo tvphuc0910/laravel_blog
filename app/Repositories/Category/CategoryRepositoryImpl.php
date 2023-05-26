@@ -20,6 +20,11 @@ class CategoryRepositoryImpl implements CategoryRepository
      * @return void
      */
 
+    public function getAllCategory()
+    {
+        return Category::query()->get();
+    }
+
     public function getListForAdmin()
     {
         return Category::paginate(5);
@@ -37,17 +42,13 @@ class CategoryRepositoryImpl implements CategoryRepository
         return Post::where('category_id', $category->id)->paginate(3);
     }
 
-    public function store($request): void
+    public function store($params): void
     {
-        $this->category->create($request);
+        $this->category->create($params);
     }
 
-    public function update($request, $category): void
+    public function updateById($category): void
     {
-        $category = Category::find($category);
-        $category->name = $request->input('name');
-        $category->slug = $request->input('slug');
-
         $category->save();
     }
 

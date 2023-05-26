@@ -32,7 +32,7 @@ class BlogController extends Controller
 
         $id = $post->id;
 
-        $suggestedPosts = $this->postService->getListsuggestedPost($category, $id);
+        $suggestedPosts = $this->postService->getListSuggestedPost($category, $id);
 
         $viewData = [
             'post' => $post,

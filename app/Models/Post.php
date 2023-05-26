@@ -27,7 +27,6 @@ class Post extends Model implements Searchable
         'content',
         'photo',
         'category_id',
-        'tag',
     ];
 
     public function category()
