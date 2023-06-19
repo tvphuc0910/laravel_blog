@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('img/apple-icon.png')}}">
     <link rel="icon" type="image/png" sizes="96x96" href="{{asset('img/favicon.png')}}">
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <title>Signin | Gaia - Bootstrap Template</title>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet" />
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet"/>
     <link href="{{asset('css/gaia.css')}}" rel="stylesheet"/>
 
     <!--     Fonts and icons     -->
@@ -23,7 +23,7 @@
 <div class="section section-signin">
 
     <div class="image-container">
-        <div class="filter filter-color-black"  style="background-image: url('{{asset('img/header-9.jpeg')}}')">
+        <div class="filter filter-color-black" style="background-image: url('{{asset('img/header-9.jpeg')}}')">
             <div class="col-md-8 col-md-offset-1">
                 <div class="content">
                     <div class="title-area">
@@ -32,13 +32,16 @@
                     </div>
 
                     <h5 class="subtitle">First Feature</h5>
-                    <p>Ultralight Prayer: Happy Easter! In Roman times the artist would contemplate proportions and colors. Now there is only one important color...
+                    <p>Ultralight Prayer: Happy Easter! In Roman times the artist would contemplate proportions and
+                        colors. Now there is only one important color...
                     </p>
                     <h5 class="subtitle">Second Feature</h5>
-                    <p>We no longer have to be scared of the truth I promise I will never let the people down. I want a better life for all!
+                    <p>We no longer have to be scared of the truth I promise I will never let the people down. I want a
+                        better life for all!
                     </p>
                     <h5 class="subtitle">Third Feature</h5>
-                    <p>WI have a dream. That dreams will actualize. Dreams will manifest. When companies doubt me they doubt us.
+                    <p>WI have a dream. That dreams will actualize. Dreams will manifest. When companies doubt me they
+                        doubt us.
                     </p>
                 </div>
             </div>
@@ -55,23 +58,26 @@
 
                 <label><h4 class="text-gray">Your email</h4></label>
                 <div class="form-group">
-                    <input type="email" name="email" value="" placeholder="MichaelJordan@gmail.com" class="form-control form-control-plain">
+                    <input type="email" name="email" value="" placeholder="MichaelJordan@gmail.com"
+                           class="form-control form-control-plain">
                 </div>
 
                 <label><h4 class="text-gray">Your password</h4></label>
                 <div class="form-group">
-                    <input type="password" name="password" value="" placeholder="&#x25CF;&#x25CF;&#x25CF;&#x25CF;" class="form-control form-control-plain">
+                    <input type="password" name="password" value="" placeholder="&#x25CF;&#x25CF;&#x25CF;&#x25CF;"
+                           class="form-control form-control-plain">
                 </div>
-                <p class="text-gray">
-                    By signing up you agree to<br>
-                    <a href="signin.html">Terms of Use</a> and <a href="signin.html"> Privacy Policy</a>
-                </p>
+                @if(session()->has('message'))
+                    <div class="alert alert-danger">
+                        {{ session()->get('message') }}
+                    </div>
+                @endif
 
                 <div class="footer">
                     <button class="btn btn-danger btn-round btn-fill btn-wd">
                         Sign In
                     </button>
-                    <p class="text-gray info">Don't have an account? <a href="signup.html">Sign up</a></p>
+                    <p class="text-gray info">Don't have an account? <a href="{{ route('user.create') }}">Sign up</a></p>
                 </div>
             </div>
         </form>

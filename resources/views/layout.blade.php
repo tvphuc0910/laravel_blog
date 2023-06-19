@@ -54,7 +54,41 @@
                 <li>
                     <a href="{{route('search.index')}}">Search</a>
                 </li>
+                @if(session()->has('id'))
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ session('name') }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-danger">
+                            <li>
+                                <a href="{{ route('user.show', session('id')) }}">Info</a>
+                            </li>
+                            @if(session('level') === 1)
+                                <li>
+                                    <a href="{{ route('admin') }}">Dash Board</a>
+                                </li>
+                            @endif
+{{--                            <li>--}}
+{{--                                <a href="../examples/portfolio.html">Portfolio</a>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <a href="../examples/signin.html">Signin</a>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <a href="../examples/signup.html">Signup</a>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <a href="../examples/components.html">All components</a>--}}
+{{--                            </li>--}}
+                            <li>
+                                <a href="{{route('logout')}}">Log out</a>
+                            </li>
+                        </ul>
+                    </li>
 
+                @else
+                <li>
+                    <a href="{{route('login')}}">Log in</a>
+                </li>
+                @endif
             </ul>
         </div>
         <!-- /.navbar-collapse -->

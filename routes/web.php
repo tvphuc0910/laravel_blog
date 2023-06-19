@@ -8,6 +8,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SendMailController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,10 +24,14 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('login', [Authcontroller::class, 'login'])->name('login');
 Route::post('login', [Authcontroller::class, 'processLogin'])->name('process_login');
+//Route::get('register', [UserController::class, 'create'])->name('register');
+//Route::post('register', [UserController::class, 'store'])->name('users.store');
+Route::get('logout', [Authcontroller::class, 'logout'])->name('logout');
+//Route::get('user-info/{id}', [UserController::class, 'info'])->name('user.info');
+Route::resource('user', UserController::class);
 Route::group([
     'middleware' => 'admin',
 ], function () {
-    Route::get('logout', [Authcontroller::class, 'logout'])->name('logout');
     Route::get('/admin', function () {
         return view('admin.layout.master');
     })->name('admin');
@@ -53,6 +58,10 @@ Route::get('send-mail', [SendMailController::class, 'sendMail']);
 
 Route::get('search', [SearchController::class, 'index'])->name('search.index');
 Route::get('search-results', [SearchController::class, 'search'])->name('search.result');
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
 
 //Route::get('posts', [PostController::class, 'index']);
 //Route::get('/create',action:[PostController::class, 'create'])->name('create');

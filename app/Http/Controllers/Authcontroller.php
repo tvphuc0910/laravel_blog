@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Throwable;
 
 class Authcontroller extends Controller
 {
     public function login()
     {
+        if(!session()->has('url.intended'))
+        {
+            session(['url.intended' => url()->previous()]);
+        }
         return view('auth.login');
     }
 
@@ -25,16 +30,15 @@ class Authcontroller extends Controller
             session()->put('name', $user->name);
             session()->put('level', $user->level);
 
-            return redirect()->route('admin');
+            return redirect(session()->get('url.intended'));
         } catch (Throwable $e) {
-            return redirect()->route('login');
+            return redirect()->route('login')->with('message', 'Incorrect email or password !');
         }
     }
 
     public function logout()
     {
         session()->flush();
-
-        return redirect()->route('welcome.index');
+        return Redirect()->route('welcome.index');
     }
 }

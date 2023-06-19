@@ -16,9 +16,11 @@ class CheckLoginMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!session()->has('level')){
+        if (session('level') == 1) {
+            return $next($request);
+        } else {
+            session()->flush();
             return redirect()->route('login');
         }
-        return $next($request);
     }
 }

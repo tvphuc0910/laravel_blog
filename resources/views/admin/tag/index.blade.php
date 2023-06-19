@@ -42,10 +42,35 @@
                 </a>
             </td>
             <td>
-                <form action="{{ route('tags.destroy', $tag) }}" method="post">
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter{{$tag->id}}">
+                    Delete
+                </button>
+                <form action="{{ route('tags.destroy', $tag->id) }}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger">Delete</button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter{{$tag->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h2 class="modal-title " id="exampleModalLongTitle">Are you sure ?</h2>
+                                </div>
+                                <div class="modal-body">
+                                    <h4 class="text-center">
+                                        Do you really want to delete this ?
+                                        This process cannot be undone !
+                                    </h4>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-fill btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button class="btn btn-fill btn-danger">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </td>
         </tr>
