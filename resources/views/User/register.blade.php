@@ -26,7 +26,7 @@
              style="background-image: url('{{asset('img/header-4.jpeg')}}')">
         </div>
         <div class="container">
-            <form method="post" action="{{ route('user.store') }}">
+            <form method="post" action="{{ route('user_store') }}">
                 @csrf
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4 text-center">

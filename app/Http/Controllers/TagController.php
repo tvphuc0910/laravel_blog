@@ -53,6 +53,8 @@ class TagController extends Controller
     {
         $this->tagService->store($request);
 
+        toastr()->closeButton(true)->addSuccess('Thêm thành công !');
+
         return redirect()->route('tags.index')->with('message', 'Thêm thành công !');
     }
 
@@ -93,6 +95,8 @@ class TagController extends Controller
     {
         $this->tagService->update($request, $tag);
 
+        toastr()->closeButton(true)->addSuccess('Cập nhật thành công !');
+
         return redirect()->route('tags.index');
     }
 
@@ -105,6 +109,8 @@ class TagController extends Controller
     public function destroy(DestroyTagRequest $request, $tag)
     {
         $this->tagService->destroy($tag);
+
+        toastr()->closeButton(true)->addSuccess('Xoá thành công !');
 
         return redirect()->route('tags.index');
     }

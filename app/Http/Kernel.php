@@ -44,7 +44,17 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
-            \App\Http\Middleware\CheckLoginMiddleware::class,
+            \App\Http\Middleware\CheckAdminLoginMiddleware::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ],
+
+        'user' => [
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
+            \App\Http\Middleware\CheckUserLoginMiddleware::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 

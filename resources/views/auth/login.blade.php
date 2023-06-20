@@ -77,7 +77,7 @@
                     <button class="btn btn-danger btn-round btn-fill btn-wd">
                         Sign In
                     </button>
-                    <p class="text-gray info">Don't have an account? <a href="{{ route('user.create') }}">Sign up</a></p>
+                    <p class="text-gray info">Don't have an account? <a href="{{ route('register') }}">Sign up</a></p>
                 </div>
             </div>
         </form>

@@ -1,26 +1,5 @@
 @extends('admin.layout.master')
 @section('content')
-    @if($msg = session('msg_error'))
-        <div class="alert alert-danger">
-            <ul>
-                <li>{{ $msg }}</li>
-            </ul>
-        </div>
-    @endif
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    @if(session()->has('message'))
-        <div class="alert alert-success">
-            {{ session()->get('message') }}
-        </div>
-    @endif
     <a class="btn btn-simple btn-success" href="{{ route('categories.create') }}">
         Add new category
     </a>
@@ -62,10 +41,10 @@
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
-                                        <h2 class="modal-title " id="exampleModalLongTitle">Are you sure ?</h2>
+                                        <h2 class="title-modern text-center" id="exampleModalLongTitle">Are you sure ?</h2>
                                     </div>
                                     <div class="modal-body">
-                                        <h4 class="text-center">
+                                        <h4 class="title-modern  text-center">
                                             Do you really want to delete this ?
                                             This process cannot be undone !
                                         </h4>

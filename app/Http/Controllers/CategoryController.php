@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Services\CategoryService;
+use Exception;
 
 class CategoryController extends Controller
 {
@@ -56,7 +57,8 @@ class CategoryController extends Controller
     {
         $this->categoryService->store($request);
 
-        return redirect()->route('categories.index')->with('message', 'Thêm thành công !');
+        toastr()->closeButton(true)->addSuccess('Thêm thành công !');
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -108,6 +110,7 @@ class CategoryController extends Controller
     {
         $this->categoryService->update($request, $category);
 
+        toastr()->closeButton(true)->addSuccess('Cập nhật thành công !');
         return redirect()->route('categories.index');
     }
 
@@ -121,10 +124,10 @@ class CategoryController extends Controller
     {
         try {
             $this->categoryService->destroy($category);
-        } catch (\Exception $e) {
-            return redirect()->back()->with([
-                'msg_error' => $e->getMessage(),
-            ]);
+            toastr()->closeButton(true)->addSuccess('Xoá thành công !');
+        } catch (Exception $e) {
+            toastr()->closeButton(true)->addError($e->getMessage());
+            return redirect()->back();
         }
 
         return redirect()->route('categories.index');

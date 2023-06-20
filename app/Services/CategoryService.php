@@ -71,7 +71,7 @@ class CategoryService
     {
         $postCount = $this->postService->countByCategoryId($categoryId);
         if ($postCount) {
-            throw new Exception('Category dang co post');
+            throw new Exception('Thể loại đang có bài viết, không thể xoá !');
         }
         $this->categoryRepository->destroyById($categoryId);
     }

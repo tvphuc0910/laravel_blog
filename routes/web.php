@@ -24,11 +24,14 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('login', [Authcontroller::class, 'login'])->name('login');
 Route::post('login', [Authcontroller::class, 'processLogin'])->name('process_login');
-//Route::get('register', [UserController::class, 'create'])->name('register');
-//Route::post('register', [UserController::class, 'store'])->name('users.store');
+Route::get('/register', [UserController::class, 'create'])->name('register');
+Route::post('/register', [UserController::class, 'store'])->name('user_store');
 Route::get('logout', [Authcontroller::class, 'logout'])->name('logout');
-//Route::get('user-info/{id}', [UserController::class, 'info'])->name('user.info');
-Route::resource('user', UserController::class);
+Route::group([
+    'middleware' => 'user'
+], function (){
+    Route::resource('user', UserController::class);
+});
 Route::group([
     'middleware' => 'admin',
 ], function () {

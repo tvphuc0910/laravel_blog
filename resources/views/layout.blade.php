@@ -56,7 +56,8 @@
                 </li>
                 @if(session()->has('id'))
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ session('name') }} <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">{{ session('name') }} <span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-danger">
                             <li>
                                 <a href="{{ route('user.show', session('id')) }}">Info</a>
@@ -66,28 +67,24 @@
                                     <a href="{{ route('admin') }}">Dash Board</a>
                                 </li>
                             @endif
-{{--                            <li>--}}
-{{--                                <a href="../examples/portfolio.html">Portfolio</a>--}}
-{{--                            </li>--}}
-{{--                            <li>--}}
-{{--                                <a href="../examples/signin.html">Signin</a>--}}
-{{--                            </li>--}}
-{{--                            <li>--}}
-{{--                                <a href="../examples/signup.html">Signup</a>--}}
-{{--                            </li>--}}
-{{--                            <li>--}}
-{{--                                <a href="../examples/components.html">All components</a>--}}
-{{--                            </li>--}}
                             <li>
                                 <a href="{{route('logout')}}">Log out</a>
                             </li>
                         </ul>
                     </li>
-
                 @else
-                <li>
-                    <a href="{{route('login')}}">Log in</a>
-                </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                           aria-expanded="false">Account <span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-danger">
+                            <li>
+                                <a href="{{ route('login') }}">Log in</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('register') }}">Register</a>
+                            </li>
+                        </ul>
+                    </li>
                 @endif
             </ul>
         </div>
@@ -127,7 +124,9 @@
             </a>
         </div>
         <div class="copyright">
-            &copy; <script>document.write(new Date().getFullYear())</script> Name
+            &copy;
+            <script>document.write(new Date().getFullYear())</script>
+            Name
         </div>
     </div>
 
@@ -139,9 +138,9 @@
 <script src="{{ asset('js/bootstrap.js') }}" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.11.1/tocbot.min.js"></script>
 <script>
-    $("h2 , h3").each(function() {
-            var hyphenated = $(this).text().replace(/\s/g,'-');
-            $(this).attr('id',hyphenated);
+    $("h2 , h3").each(function () {
+            var hyphenated = $(this).text().replace(/\s/g, '-');
+            $(this).attr('id', hyphenated);
         }
     );
 
@@ -155,7 +154,6 @@
         hasInnerContainers: true,
         collapseDepth: 6,
     });
-
 
 
 </script>

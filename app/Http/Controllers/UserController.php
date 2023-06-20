@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Services\UserService;
+use Exception;
 
 class UserController extends Controller
 {
@@ -25,28 +26,48 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         $this->userService->store($request);
+
+        toastr()->closeButton(true)->addSuccess('Tạo tài khoản thành công ! <br> Đăng nhập để tiếp tục');
+
         return redirect()->route('welcome.index');
     }
 
     public function show($id)
     {
-        $viewData = [
-            'user' => $this->userService->info($id),
-        ];
-        return view('user.info')->with($viewData);
+        try {
+            $viewData = [
+                'user' => $this->userService->info($id),
+            ];
+            return view('user.info')->with($viewData);
+        } catch (Exception $e){
+            toastr()->closeButton(true)->addError($e->getMessage());
+            return redirect()->back();
+        }
+
     }
 
     public function edit(User $user)
     {
-        $viewData = [
-            'user' => $user
-        ];
-        return view('user.edit')->with($viewData);
+
+        if ($user->id == session('id')){
+            $viewData = [
+                'user' => $user
+            ];
+            return view('user.edit')->with($viewData);
+        } else {
+            return redirect()->back();
+        }
+//        $viewData = [
+//            'user' => $user
+//        ];
+//        return view('user.edit')->with($viewData);
     }
 
     public function update(UpdateUserRequest $request, $user)
     {
         $this->userService->update($request, $user);
+
+        toastr()->closeButton(true)->addSuccess('Cập nhật thành công !');
 
         return redirect()->route('user.show', $user);
     }
@@ -54,6 +75,8 @@ class UserController extends Controller
     public function destroy(DestroyUserRequest $request, $user)
     {
         $this->userService->destroy($user);
+
+        toastr()->closeButton(true)->addSuccess('Xoá thành công !');
 
         return redirect()->route('welcome.index');
     }

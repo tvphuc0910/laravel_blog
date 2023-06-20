@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\User;
 use App\Repositories\User\UserRepository;
+use Exception;
 use Illuminate\Http\Request;
 
 class UserService
@@ -20,6 +21,9 @@ class UserService
 
     public function info($id)
     {
+        if ($id != session('id')){
+            throw new Exception('Bạn không có quyền truy cập vào thông tin này !');
+        }
         return $this->userRepository->getInfoById($id);
     }
 

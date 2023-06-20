@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckLoginMiddleware
+class CheckUserLoginMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class CheckLoginMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (session('level') == 1) {
+        if (session()->has('level')) {
             return $next($request);
         } else {
             session()->flush();

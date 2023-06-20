@@ -72,8 +72,9 @@ class PostController extends Controller
 //            $arr = $request->validated();
 //        }
 //        $this->model->create($arr)->tag()->attach($request->tag);
+        toastr()->closeButton(true)->addSuccess('Thêm thành công !');
 
-        return redirect()->route('posts.index')->with('message', 'Thêm thành công !');
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -117,6 +118,8 @@ class PostController extends Controller
     {
         $this->postService->update($request, $post);
 
+        toastr()->closeButton(true)->addSuccess('Cập nhật bài viết thành công !');
+
         return redirect()->route('posts.index');
     }
 
@@ -129,6 +132,8 @@ class PostController extends Controller
     public function destroy(DestroyPostRequest $request, $post)
     {
         $this->postService->destroy($post);
+
+        toastr()->closeButton(true)->addSuccess('Xoá thành công !');
 
         return redirect()->route('posts.index');
     }
