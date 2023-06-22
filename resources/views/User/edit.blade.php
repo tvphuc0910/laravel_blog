@@ -40,7 +40,7 @@
             </div>
             <label>Password</label>
             <div class="form-group">
-                <input type="text" name="password" class="form-control" value="{{ $user->password }}">
+                <input type="text" name="password" class="form-control" value="">
                 @if($errors->has('password'))
                     <span class="text-danger">
                         {{ $errors->first('password') }}
@@ -49,7 +49,7 @@
             </div>
             <label>Password confirm</label>
             <div class="form-group">
-                <input type="text" name="password_confirmation" class="form-control" value="{{ $user->password }}">
+                <input type="text" name="password_confirmation" class="form-control" value="">
                 @if($errors->has('password_confirmation'))
                     <span class="text-danger">
                         {{ $errors->first('password_confirmation') }}

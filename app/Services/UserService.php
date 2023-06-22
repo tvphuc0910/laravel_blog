@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Repositories\User\UserRepository;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
@@ -16,7 +17,9 @@ class UserService
 
     public function store(Request $params): void
     {
-        $this->userRepository->store($params->validated());
+        $params = $params->validated();
+        $params['password'] = Hash::make($params['password']);
+        $this->userRepository->store($params);
     }
 
     public function info($id)
@@ -32,7 +35,7 @@ class UserService
         $user = User::find($user);
         $user->name = $params->input('name');
         $user->email = $params->input('email');
-        $user->password = $params->input('password');
+        $user->password = Hash::make($params->input('password'));
 
         $this->userRepository->updateById($user);
     }
