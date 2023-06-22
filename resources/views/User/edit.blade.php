@@ -23,14 +23,38 @@
             <label>Name</label>
             <div class="form-group">
                 <input type="text" name="name" class="form-control" value="{{ $user->name }}">
+                @if($errors->has('name'))
+                    <span class="text-danger">
+                        {{ $errors->first('name') }}
+                    </span>
+                @endif
             </div>
             <label>Email</label>
             <div class="form-group">
                 <input type="text" name="email" class="form-control" value="{{ $user->email }}">
+                @if($errors->has('email'))
+                    <span class="text-danger">
+                        {{ $errors->first('email') }}
+                    </span>
+                @endif
             </div>
             <label>Password</label>
             <div class="form-group">
                 <input type="text" name="password" class="form-control" value="{{ $user->password }}">
+                @if($errors->has('password'))
+                    <span class="text-danger">
+                        {{ $errors->first('password') }}
+                    </span>
+                @endif
+            </div>
+            <label>Password confirm</label>
+            <div class="form-group">
+                <input type="text" name="password_confirmation" class="form-control" value="{{ $user->password }}">
+                @if($errors->has('password_confirmation'))
+                    <span class="text-danger">
+                        {{ $errors->first('password_confirmation') }}
+                    </span>
+                @endif
             </div>
         </div>
         <button class="btn btn-fill btn-success">Update</button>

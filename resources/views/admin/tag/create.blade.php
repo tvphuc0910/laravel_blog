@@ -14,7 +14,7 @@
     <div class="form-group">
         <label>Tag</label>
         <br>
-        <input type="text" name="name" class="form-control">
+        <input type="text" name="name" value="{{ old('name') }}" class="form-control">
     </div>
     <button class="btn btn-fill btn-success">Create</button>
 </form>

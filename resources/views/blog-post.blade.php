@@ -33,35 +33,35 @@
         </div>
     </div>
 </div>
-Suggested Posts by category
 <br>
-@foreach($suggestedPosts as $suggestedPost)
-    <div class="card card-plain card-blog">
+<div class="section section-gray">
+    <div class="container">
+        <div class="title-area">
+            <h5 class="subtitle text-gray">Don't miss our</h5>
+            <h2>Most Recommended Stories</h2>
+            <div class="separator separator-danger">✻</div>
+        </div>
         <div class="row">
-            <div class="col-sm-6">
-                <a href="{{route('blog.show', $suggestedPost)}}" class="header">
-                    <img src="{{asset('storage/'. $suggestedPost->photo)}}">
-                </a>
-            </div>
-            <div class="col-sm-5 col-md-offset-1">
-                <div class="content">
-                    <a href="{{route('category.show', $suggestedPost->category->slug)}}"  class="btn btn-simple btn-info">
-                        {{ $suggestedPost->category->name }}
-                    </a>
-                    <a href="{{route('blog.show', $suggestedPost)}}" class="card-title">
-                        <h2>{{$suggestedPost->title}}</h2>
-                    </a>
-
-                    <p class="text-gray">{{$suggestedPost->description}}</p>
-
-
-                    <a href="{{route('blog.show', $suggestedPost)}}" class="btn btn-danger btn-fill">Read More</a>
-
+            @foreach($suggestedPosts as $suggestedPost)
+                <div class="col-md-4">
+                    <div class="card card-blog">
+                        <a href="{{route('blog.show', $suggestedPost)}}" class="header">
+                            <img src="{{asset('storage/'. $suggestedPost->photo)}}" class="image-header">
+                        </a>
+                        <div class="content">
+                            <h6 class="card-date">{{ $suggestedPost->created_at->toFormattedDateString() }}</h6>
+                            <a href="{{route('blog.show', $suggestedPost)}}" class="card-title">
+                                <h3>{{$suggestedPost->title}}</h3>
+                            </a>
+                            <div class="line-divider line-danger"></div>
+                            <h6 class="card-category">{{ $suggestedPost->category->name }}</h6>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            @endforeach
         </div>
     </div>
-@endforeach
+</div>
 
 @endsection
 

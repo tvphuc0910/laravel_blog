@@ -58,13 +58,13 @@
 
                 <label><h4 class="text-gray">Your email</h4></label>
                 <div class="form-group">
-                    <input type="email" name="email" value="" placeholder="MichaelJordan@gmail.com"
+                    <input type="email" name="email" placeholder="MichaelJordan@gmail.com"
                            class="form-control form-control-plain">
                 </div>
 
                 <label><h4 class="text-gray">Your password</h4></label>
                 <div class="form-group">
-                    <input type="password" name="password" value="" placeholder="&#x25CF;&#x25CF;&#x25CF;&#x25CF;"
+                    <input type="password" name="password" placeholder="&#x25CF;&#x25CF;&#x25CF;&#x25CF;"
                            class="form-control form-control-plain">
                 </div>
                 @if(session()->has('message'))

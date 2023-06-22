@@ -36,12 +36,22 @@
 
                         <p class="description">No credit card required.</p>
                         <div class="form-group">
-                            <input type="text" name="name" value="" placeholder="Name"
+                            <input type="text" name="name" value="{{ old('name') }}" placeholder="Name"
                                    class="form-control form-control-plain">
+                            @if($errors->has('name'))
+                                <span class="text-danger">
+                                    {{ $errors->first('name') }}
+                                </span>
+                            @endif
                         </div>
                         <div class="form-group">
-                            <input type="text" name="email" value="" placeholder="Email"
+                            <input type="text" name="email" value="{{ old('email') }}" placeholder="Email"
                                    class="form-control form-control-plain">
+                            @if($errors->has('email'))
+                                <span class="text-danger">
+                                    {{ $errors->first('email') }}
+                                </span>
+                            @endif
                         </div>
                         <div>
                             <input type="hidden" name="level" value="0">
@@ -49,10 +59,20 @@
                         <div class="form-group">
                             <input type="password" name="password" value="" placeholder="Password"
                                    class="form-control form-control-plain">
+                            @if($errors->has('password'))
+                                <span class="text-danger">
+                                    {{ $errors->first('password') }}
+                                </span>
+                            @endif
                         </div>
                         <div class="form-group">
-                            <input type="password" value="" placeholder="Confirm password"
+                            <input type="password" name="password_confirmation" value="" placeholder="Confirm password"
                                    class="form-control form-control-plain">
+                            @if($errors->has('password_confirmation'))
+                                <span class="text-danger">
+                                    {{ $errors->first('password_confirmation') }}
+                                </span>
+                            @endif
                         </div>
                         <p>
                             By signing up you agree to
