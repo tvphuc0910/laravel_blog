@@ -4,6 +4,7 @@ use App\Http\Controllers\Authcontroller;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ItemSearchController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SendMailController;
@@ -31,6 +32,7 @@ Route::group([
     'middleware' => 'user'
 ], function (){
     Route::resource('user', UserController::class);
+    Route::get('/like/{id}', [LikeController::class, 'like']);
 });
 Route::group([
     'middleware' => 'admin',

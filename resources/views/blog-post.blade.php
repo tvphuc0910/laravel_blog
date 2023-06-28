@@ -31,6 +31,7 @@
                 </div>
             </div>
         </div>
+        <a class="text-danger interactor" href="/like/{{ $post->id }}">{{ $like }} Like</a>
     </div>
 </div>
 <br>
@@ -63,6 +64,23 @@
     </div>
 </div>
 
+@endsection
+
+@section('script')
+    <script>
+        $(".interactor").click(function(e){
+            e.preventDefault();// you dont want your anchor to redirect so prevent it
+            $.ajax({
+                type: "GET",
+                // blade.php already loaded with contents we need, so we just need to
+                // select the anchor attribute href with js.
+                url: $('.interactor').attr('href'),
+                success: function() {
+                    location.reload();
+                }
+            })
+        });
+    </script>
 @endsection
 
 

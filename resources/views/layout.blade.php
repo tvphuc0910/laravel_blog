@@ -157,6 +157,7 @@
 
 
 </script>
+@yield('script')
 <!--  js library for devices recognition -->
 <script type="text/javascript" src="{{ asset('js/modernizr.js') }}"></script>
 

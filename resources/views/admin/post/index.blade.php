@@ -69,7 +69,7 @@
                                     </h4>
                                 </div>
 
-                                <form action="{{ route('posts.destroy', $post) }}" method="post">
+                                <form class="delete-form" data-route="{{ route('posts.destroy', $post) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <div class="modal-footer">

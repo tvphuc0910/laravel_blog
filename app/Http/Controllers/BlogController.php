@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Like;
 use App\Models\Post;
 use App\Models\Category;
 use App\Services\PostService;
@@ -34,10 +35,13 @@ class BlogController extends Controller
 
         $suggestedPosts = $this->postService->getListSuggestedPost($category, $id);
 
+        $like = Like::where('id_post', $id)->count();
+
         $viewData = [
             'post' => $post,
             'category' => $category,
             'suggestedPosts' => $suggestedPosts,
+            'like' => $like,
         ];
 
         return view('blog-post')->with($viewData);
