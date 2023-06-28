@@ -1,89 +1,57 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-    <!-- if you want to keep the navbar hidden you can add this class to the navbar "navbar-burger"-->
-    <div class="container">
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-minimize">
+            <button id="minimizeSidebar" class="btn btn-fill btn-icon"><i class="ti-more-alt"></i></button>
+        </div>
         <div class="navbar-header">
-            <button id="menu-toggle" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example">
+            <button type="button" class="navbar-toggle">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar bar1"></span>
                 <span class="icon-bar bar2"></span>
                 <span class="icon-bar bar3"></span>
             </button>
-            <a class="navbar-brand">
-                Dashboard
-            </a>
+            <a class="navbar-brand" href="#charts">Template</a>
         </div>
         <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-right navbar-uppercase">
+            <form class="navbar-form navbar-left navbar-search-form" role="search">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text" value="" class="form-control" placeholder="Search...">
+                </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="{{route('welcome.index')}}">Home</a>
+                    <a href="#stats" class="dropdown-toggle btn-magnify" data-toggle="dropdown">
+                        <i class="ti-panel"></i>
+                        <p>Stats</p>
+                    </a>
                 </li>
-{{--                <li class="dropdown">--}}
-{{--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <span class="caret"></span></a>--}}
-{{--                    <ul class="dropdown-menu dropdown-danger">--}}
-{{--                        <li>--}}
-{{--                            <a href="blog-post.html">Blog post</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="blog-posts.html">Blog Posts</a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
-{{--                <li class="dropdown">--}}
-{{--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <span class="caret"></span></a>--}}
-{{--                    <ul class="dropdown-menu dropdown-danger">--}}
-{{--                        <li>--}}
-{{--                            <a href="about-us.html">About us</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="contact-us.html">Contact us</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="portfolio.html">Portfolio</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="signin.html">Signin</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="signup.html">Signup</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="../documentation/components.html">All components</a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
-                <li>
-                    <a href="{{ route('posts.index') }}">Posts</a>
+                <li class="dropdown">
+                    <a href="#notifications" class="dropdown-toggle btn-rotate" data-toggle="dropdown">
+                        <i class="ti-bell"></i>
+                        <span class="notification">5</span>
+                        <p class="hidden-md hidden-lg">
+                            Notifications
+                            <b class="caret"></b>
+                        </p>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#not1">Notification 1</a></li>
+                        <li><a href="#not2">Notification 2</a></li>
+                        <li><a href="#not3">Notification 3</a></li>
+                        <li><a href="#not4">Notification 4</a></li>
+                        <li><a href="#another">Another notification</a></li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="{{ route('categories.index') }}">Categories</a>
+                    <a href="#settings" class="btn-rotate">
+                        <i class="ti-settings"></i>
+                        <p class="hidden-md hidden-lg">
+                            Settings
+                        </p>
+                    </a>
                 </li>
-                <li>
-                    <a href="{{ route('tags.index') }}">Tags</a>
-                </li>
-                <li>
-                    <a href="{{ route('logout') }}">Log out</a>
-                </li>
-{{--                <li>--}}
-{{--                    <a href="http://www.creative-tim.com/product/gaia-bootstrap-template-pro" class="btn btn-danger btn-fill">Buy now</a>--}}
-{{--                </li>--}}
-{{--                <li class="dropdown">--}}
-{{--                    <a href="#gaia" class="dropdown-toggle" data-toggle="dropdown">--}}
-{{--                        <i class="fa fa-share-alt"></i> Share--}}
-{{--                    </a>--}}
-{{--                    <ul class="dropdown-menu dropdown-danger">--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fa fa-facebook-square"></i> Facebook</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fa fa-twitter"></i> Twitter</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fa fa-instagram"></i> Instagram</a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
             </ul>
         </div>
-        <!-- /.navbar-collapse -->
     </div>
 </nav>

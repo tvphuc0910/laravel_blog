@@ -127,9 +127,9 @@ class CategoryController extends Controller
             toastr()->closeButton(true)->addSuccess('Xoá thành công !');
         } catch (Exception $e) {
             toastr()->closeButton(true)->addError($e->getMessage());
-            return redirect()->back();
+//            return redirect()->back();
         }
 
-        return redirect()->route('categories.index');
+//        return redirect()->route('categories.index');
     }
 }

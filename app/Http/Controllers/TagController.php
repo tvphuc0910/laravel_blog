@@ -109,9 +109,7 @@ class TagController extends Controller
     public function destroy(DestroyTagRequest $request, $tag)
     {
         $this->tagService->destroy($tag);
-
         toastr()->closeButton(true)->addSuccess('Xoá thành công !');
-
-        return redirect()->route('tags.index');
+//        return redirect()->route('tags.index');
     }
 }

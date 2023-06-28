@@ -27,41 +27,45 @@
                     </a>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter{{$category->id}}">
+                    <button type="button" class="btn btn-danger" data-toggle="modal"
+                            data-target="#exampleModalCenter{{$category->id}}">
                         Delete
                     </button>
-                    <form action="{{ route('categories.destroy', $category) }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModalCenter{{$category->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <h2 class="title-modern text-center" id="exampleModalLongTitle">Are you sure ?</h2>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h4 class="title-modern  text-center">
-                                            Do you really want to delete this ?
-                                            This process cannot be undone !
-                                        </h4>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-fill btn-secondary" data-dismiss="modal">Cancel</button>
-                                        <button class="btn btn-fill btn-danger">Delete</button>
-                                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModalCenter{{$category->id}}" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <h2 class="title-modern text-center" id="exampleModalLongTitle">Are you sure
+                                        ?</h2>
                                 </div>
+                                <div class="modal-body">
+                                    <h4 class="title-modern  text-center">
+                                        Do you really want to delete this ?
+                                        This process cannot be undone !
+                                    </h4>
+                                </div>
+
+                                <form class="delete-form"
+                                      data-route="{{route('categories.destroy',$category->id)}}" method="post">
+                                    @method('DELETE')
+                                    @csrf
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-fill btn-secondary"
+                                                data-dismiss="modal">Cancel
+                                        </button>
+                                        <button type="submit" class="btn btn-fill btn-danger">Delete</button>
+                                    </div>
+
+                                </form>
                             </div>
                         </div>
+                    </div>
                     </form>
-{{--                    <form action="{{ route('categories.destroy', $category) }}" method="post">--}}
-{{--                        @csrf--}}
-{{--                        @method('DELETE')--}}
-{{--                        <button class="btn btn-danger">Delete</button>--}}
-{{--                    </form>--}}
                 </td>
             </tr>
         @endforeach
@@ -70,4 +74,27 @@
         {{ $categories->links() }}
     </div>
     <br>
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+
+        $('.delete-form').on('submit', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                type: 'post',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: $(this).data('route'),
+                data: {
+                    '_method': 'delete'
+                },
+                success: function (response, textStatus, xhr) {
+                    location.reload();
+                }
+            });
+        })
+    </script>
 @endsection
