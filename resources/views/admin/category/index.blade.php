@@ -65,7 +65,6 @@
                             </div>
                         </div>
                     </div>
-                    </form>
                 </td>
             </tr>
         @endforeach

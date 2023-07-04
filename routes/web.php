@@ -3,6 +3,7 @@
 use App\Http\Controllers\Authcontroller;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ItemSearchController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
@@ -33,6 +34,9 @@ Route::group([
 ], function (){
     Route::resource('user', UserController::class);
     Route::get('/like/{id}', [LikeController::class, 'like']);
+//    Route::post('comments', [CommentController::class, 'store']);
+//    Route::post('comments/{id}', [CommentController::class, 'update'])->name('comments.update');
+    Route::resource('comments', CommentController::class);
 });
 Route::group([
     'middleware' => 'admin',

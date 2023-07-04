@@ -6,7 +6,6 @@ use App\Http\Requests\DestroyCategoryRequest;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
-use App\Models\Post;
 use App\Services\CategoryService;
 use Exception;
 

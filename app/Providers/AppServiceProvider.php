@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Category\CategoryRepositoryImpl;
+use App\Repositories\Comment\CommentRepository;
+use App\Repositories\Comment\CommentRepositoryIml;
 use App\Repositories\Post\PostRepository;
 use App\Repositories\Post\PostRepositoryImpl;
 use App\Repositories\Tag\TagRepository;
@@ -27,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PostRepository::class, PostRepositoryImpl::class);
         $this->app->bind(TagRepository::class, TagRepositoryImpl::class);
         $this->app->bind(UserRepository::class, UserRepositoryImpl::class);
+        $this->app->bind(CommentRepository::class, CommentRepositoryIml::class);
     }
 
     /**
