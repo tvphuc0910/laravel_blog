@@ -11,9 +11,9 @@
 @endif
 <form action="{{ route('posts.store') }}" method="post" enctype="multipart/form-data">
     @csrf
-    <label>Category</label>
     <div class="form-group">
-        <select name="category_id" class="form-control" >
+        <label>Category</label>
+        <select name="category_id" class="selectpicker col-lg-2" >
             @foreach($categories as $category)
                 <option value="{{ $category->id }}">
                     {{$category->name}}
@@ -21,8 +21,7 @@
             @endforeach
         </select>
     </div>
-    <br>
-    <div class="form-group">
+    <div class="form-group ">
         <label>Title</label>
         <div class="form-group">
             <input type="text" name="title" class="form-control" value="{{ old('title') }}">
@@ -40,12 +39,13 @@
     </div>
     <div class="form-group">
         <label>Tags</label>
-        <select multiple class="form-control" name="tag[]">
-            @foreach($tags as $tag)
-                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
-            @endforeach
-        </select>
+            <select multiple title="Select Tags" name="tag[]" class="selectpicker col-lg-2" data-style="btn-info btn-fill btn-block" data-size="5">
+                @foreach($tags as $tag)
+                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                @endforeach
+            </select>
     </div>
+
     <div class="form-group">
         <label>Image</label>
         <input class="custom-file-input" type="file" name="photo">

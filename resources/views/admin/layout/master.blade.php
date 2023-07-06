@@ -34,12 +34,6 @@
 {{--    <!--   Core JS Files. Extra: TouchPunch for touch library inside jquery-ui.min.js   -->--}}
     <script src="{{ asset('dashboard/js/bootstrap.min.js') }}" type="text/javascript"></script>
 
-    <!-- Sweet Alert 2 plugin -->
-    <script src="{{ asset('dashboard/js/sweetalert2.js') }}"></script>
-
-    <!-- Promise Library for SweetAlert2 working on IE -->
-    <script src="{{ asset('dashboard/js/es6-promise-auto.min.js') }}"></script>
-
 </head>
 
 <body>
@@ -57,6 +51,7 @@
                 </div>
             </div>
         </div>
+        <br>
         @include('admin.layout.footer')
     </div>
 </div>
@@ -68,51 +63,10 @@
 <!--  Forms Validations Plugin -->
 <script src="{{ asset('dashboard/js/jquery.validate.min.js') }}"></script>
 
-
-<!--  Plugin for Date Time Picker and Full Calendar Plugin-->
-<script src="{{ asset('dashboard/js/moment.min.js') }}"></script>
-
-<!--  Date Time Picker Plugin is included in this js file -->
-<script src="{{ asset('dashboard/js/bootstrap-datetimepicker.js') }}"></script>
-
-<!--  Select Picker Plugin -->
-<script src="{{ asset('dashboard/js/bootstrap-selectpicker.js') }}"></script>
-
-<!--  Switch and Tags Input Plugins -->
-<script src="{{ asset('dashboard/js/bootstrap-switch-tags.js') }}"></script>
-
-<!-- Circle Percentage-chart -->
-<script src="{{ asset('dashboard/js/jquery.easypiechart.min.js') }}"></script>
-
-<!--  Charts Plugin -->
-<script src="{{ asset('dashboard/js/chartist.min.js') }}"></script>
-
-<!--  Notifications Plugin    -->
-<script src="{{ asset('dashboard/js/bootstrap-notify.js') }}"></script>
-
-
-<!-- Vector Map plugin -->
-<script src="{{ asset('dashboard/js/jquery-jvectormap.js') }}"></script>
-
-<!--  Google Maps Plugin    -->
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-
-<!-- Wizard Plugin    -->
-<script src="{{ asset('dashboard/js/jquery.bootstrap.wizard.min.js') }}"></script>
-
-<!--  Bootstrap Table Plugin    -->
-<script src="{{ asset('dashboard/js/bootstrap-table.js') }}"></script>
-
-<!--  Plugin for DataTables.net  -->
-<script src="{{ asset('dashboard/js/jquery.datatables.js') }}"></script>
-
-<!--  Full Calendar Plugin    -->
-<script src="{{ asset('dashboard/js/fullcalendar.min.js') }}"></script>
-
 <!-- Paper Dashboard PRO Core javascript and methods for Demo purpose -->
 <script src="{{ asset('dashboard/js/paper-dashboard.js') }}"></script>
 
-<!-- Paper Dashboard PRO DEMO methods, don't include it in your project! -->
-<script src="{{ asset('dashboard/js/demo.js') }}"></script>
+<!--  Select Picker Plugin -->
+<script src="{{ asset('dashboard/js/bootstrap-selectpicker.js') }}"></script>
 
 </html>
