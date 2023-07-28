@@ -4,14 +4,13 @@ namespace App\Mail;
 
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class HelloMail extends Mailable
+class ActiveUserMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -48,9 +47,9 @@ class HelloMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'mail.hello',
+            view: 'mail.active-mail',
             with: [
-                'name' => $this->user
+                'name' => $this->user,
             ],
         );
     }

@@ -7,6 +7,7 @@ use App\Repositories\User\UserRepository;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserService
 {

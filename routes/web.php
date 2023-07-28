@@ -34,8 +34,6 @@ Route::group([
 ], function (){
     Route::resource('user', UserController::class);
     Route::get('/like/{id}', [LikeController::class, 'like']);
-//    Route::post('comments', [CommentController::class, 'store']);
-//    Route::post('comments/{id}', [CommentController::class, 'update'])->name('comments.update');
     Route::resource('comments', CommentController::class);
 });
 Route::group([
@@ -52,7 +50,6 @@ Route::group([
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome.index');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
-//Route::resource('categories', CategoryController::class);
 Route::get('/categories', [CategoryController::class, 'guestIndex'])->name('category.index');
 Route::get('/categories/{category:slug}', [CategoryController::class, 'guestShow'])->name('category.show');
 
@@ -62,7 +59,8 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-Route::get('send-mail', [SendMailController::class, 'sendMail']);
+Route::get('/send-verify-email/{id}', [SendMailController::class, 'sendActiveMail'])->name('mail.active');
+Route::get('/active/{user}/{token}', [UserController::class, 'active'])->name('user.active');
 //Route::get('store-queue', [StudyController::class, 'storeQueue']);
 
 Route::get('search', [SearchController::class, 'index'])->name('search.index');
@@ -72,5 +70,3 @@ Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
 
-//Route::get('posts', [PostController::class, 'index']);
-//Route::get('/create',action:[PostController::class, 'create'])->name('create');

@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Services\UserService;
 use Exception;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -30,6 +31,14 @@ class UserController extends Controller
         toastr()->closeButton(true)->addSuccess('Tạo tài khoản thành công ! <br> Đăng nhập để tiếp tục');
 
         return redirect()->route('welcome.index');
+    }
+
+    public function active($id, $token){
+        $user = User::find($id);
+        if($user->token == $token) {
+            $user->update(['status' => 1, 'token' => null]);
+            return redirect()->route('user.show', session('id'));
+        }
     }
 
     public function show($id)

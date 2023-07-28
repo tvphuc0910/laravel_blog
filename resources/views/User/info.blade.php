@@ -22,6 +22,15 @@
         <li class="list-group-item">Name: {{ $user->name }}</li>
         <li class="list-group-item">Email: {{ $user->email }}</li>
         <li class="list-group-item">Password: *****</li>
+        @if($user->status == 1)
+            <li>
+                <button type="button" class="btn btn-success">Actived</button>
+            </li>
+        @else
+            <li class="list-group-item">
+                <a href="{{ route('mail.active', $user->id) }}" class="btn btn-black" >Active your account</a>
+            </li>
+        @endif
     </ul>
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter{{$user->id}}">
         Delete

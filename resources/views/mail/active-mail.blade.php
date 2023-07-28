@@ -8,6 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-
+    Hello {{ $user-> name}}
+    <a href="{{ route('user.active',[$user->id, $user->token]) }}">Kích hoạt</a>
 </body>
 </html>
