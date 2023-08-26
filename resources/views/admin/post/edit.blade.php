@@ -14,7 +14,7 @@
         <label>Category</label>
         <div class="form-group">
             @method('PUT')
-            <select name="category_id" class="form-control">
+            <select name="category_id" class="selectpicker col-lg-2" >
                 @foreach($categories as $category)
                     <option
                         value="{{ $category->id }}" {{ $category->id == $post->category_id ? 'selected' : '' }}>{{ $category->name }}
