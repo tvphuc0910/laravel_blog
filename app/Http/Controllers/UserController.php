@@ -89,4 +89,9 @@ class UserController extends Controller
 
         return redirect()->route('welcome.index');
     }
+
+    public function getAll()
+    {
+        return User::all();
+    }
 }
