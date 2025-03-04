@@ -2,9 +2,12 @@
 
 namespace App\Services;
 
+use App\Jobs\InsertPostsJob;
 use App\Models\Post;
 use App\Repositories\Post\PostRepository;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class PostService
@@ -30,7 +33,10 @@ class PostService
             $arr = $params->validated();
             $arr['tag'] = $params->tag;
         }
+
         $this->postRepository->store($arr);
+
+        Cache::flush();
     }
 
     public function update($params, $post): void
@@ -89,5 +95,37 @@ class PostService
 //        return Post::where('category_id', $id)->count();
     }
 
+    public function search($searchterm)
+    {
+        $cacheKey = 'search_' . md5($searchterm); // Tạo cache key duy nhất cho mỗi từ khóa tìm kiếm
+
+        return Cache::remember($cacheKey, 600, function () use ($searchterm) {
+            return Post::where('title', 'LIKE', '%' . $searchterm . '%')
+                ->orWhere('description', 'LIKE', '%' . $searchterm . '%')
+                ->paginate(10);
+        });
+    }
+
+    public function bulkInsert()
+    {
+        $posts = [];
+
+        for ($i = 1; $i <= 100000; $i++) {
+            $posts[] = [
+                'category_id' => 1,
+                'slug' => rand(),
+                'title' => "Bài viết số $i",
+                'description' => "Tóm abvavav3 " . rand(),
+                'content' => "<p>Nội dung bài viết số $i </p><p>adsf&agrave;&agrave;&agrave;&aacute;dffăewrư&egrave;</p>".rand(),
+                'photo' => 'photo/JlA6MsPrqKEzI7IMaoIyx8po1ZiSaIEro8a4CBbC.jpg',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+        }
+        $chunks = array_chunk($posts, 5000);
+        foreach ($chunks as $chunk) {
+            InsertPostsJob::dispatch($chunk);
+        }
+    }
 
 }

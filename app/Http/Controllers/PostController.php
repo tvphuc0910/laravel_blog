@@ -9,6 +9,7 @@ use App\Models\Post;
 use App\Services\CategoryService;
 use App\Services\PostService;
 use App\Services\TagService;
+use Illuminate\Support\Facades\Log;
 
 class PostController extends Controller
 {
@@ -136,5 +137,17 @@ class PostController extends Controller
         toastr()->closeButton(true)->addSuccess('Xoá thành công !');
 
         return redirect()->route('posts.index');
+    }
+
+    public function insertPostRedis()
+    {
+        try {
+
+            $this->postService->bulkInsert();
+            return 'OK';
+        } catch (\Exception $e) {
+            Log::error($e);
+            return $e;
+        }
     }
 }

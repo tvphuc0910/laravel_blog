@@ -12,6 +12,7 @@ use App\Http\Controllers\SendMailController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
+use App\Jobs\InsertPostsJob;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -70,3 +71,5 @@ Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
 
+
+Route::get('/test-job',[PostController::class, 'insertPostRedis']);
